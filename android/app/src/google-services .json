@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "832667445472",
+    "firebase_url": "https://substation-app.firebaseio.com",
+    "project_id": "substation-app",
+    "storage_bucket": "substation-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832667445472:android:025a082a82c8f0506e0885",
+        "android_client_info": {
+          "package_name": "com.multitouchenterprisekenya.substation_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832667445472-qaht5h6dvnee6frm2f5rj5r8o6ns0sjd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.multitouchenterprisekenya.substation_app",
+            "certificate_hash": "ac918b3af86f1d5621dc58e08006dfda8b97be6d"
+          }
+        },
+        {
+          "client_id": "832667445472-7doddn40sgt2dqn1c2oep2f6hja4mqec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUCFtefbYuOlgJnHnOhUOZMdHzReAEMqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832667445472-7doddn40sgt2dqn1c2oep2f6hja4mqec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
