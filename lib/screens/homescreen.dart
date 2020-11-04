@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:substation_app/models/sign_in.dart';
+import 'package:substation_app/screens/dashboard.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,47 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[300],
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.black87,
-              size: 30.0,
-            ),
-            onPressed: () {},
-          ),
-          actions: [
-            // IconButton(onPressed: () {  }, icon:Icon(
-            //     Icons.account_circle,
-            //   color: Colors.black87,
-            //   size: 30.0,
-            // ),
-
-            // ),
-            IconButton(
-              padding: EdgeInsets.all(16.0),
-              onPressed: () {},
-              icon: Icon(
-                Icons.settings,
-                color: Colors.black87,
-                size: 30.0,
-              ),
-            )
-          ],
-          backgroundColor: Colors.amber,
-          title: Center(
-            child: Text(
-              'Substation APP',
-              style: TextStyle(
-                color: Colors.black87,
-                fontFamily: 'Pacifico',
-                fontSize: 20.0,
-                letterSpacing: 1.2,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
         body: Stack(
           children: [
             Container(
@@ -134,10 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {},
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.fact_check,
-                                color: Colors.white,
-                              ),
+                              Image(
+                                  image: AssetImage(
+                                      "assets/images/facebook_logo.jpg"),
+                                  height: 35.0),
+                              // Icon(
+                              //   Icons.fact_check,
+                              //   color: Colors.white,
+                              // ),
                               SizedBox(
                                 width: 30.0,
                               ),
@@ -164,13 +129,27 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(50)),
                           padding: EdgeInsets.all(16.0),
                           color: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {
+                            signInWithGoogle().whenComplete(() {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return DashBoard();
+                                  },
+                                ),
+                              );
+                            });
+                          },
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.add_to_drive,
-                                color: Colors.black,
-                              ),
+                              Image(
+                                  image: AssetImage(
+                                      "assets/images/google_logo.png"),
+                                  height: 35.0),
+                              // Icon(
+                              //   Icons.add_to_drive,
+                              //   color: Colors.black,
+                              // ),
                               SizedBox(
                                 width: 30.0,
                               ),
