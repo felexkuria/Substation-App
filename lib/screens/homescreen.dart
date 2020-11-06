@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:substation_app/models/sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:substation_app/screens/dashboard.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+bool _success;
+String _userEmail;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -56,7 +64,57 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(50)),
                           padding: EdgeInsets.all(16.0),
                           color: Colors.red[900],
-                          onPressed: () {},
+                          onPressed: () {
+                            Alert(
+                                context: context,
+                                title: "LOGIN",
+                                content: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      TextFormField(
+                                        controller: _emailController,
+                                        decoration: const InputDecoration(
+                                            labelText: 'Email'),
+                                        validator: (String value) {
+                                          if (value.isEmpty) {
+                                            return 'Please enter some text';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        controller: _passwordController,
+                                        decoration: const InputDecoration(
+                                            labelText: 'Password'),
+                                        validator: (String value) {
+                                          if (value.isEmpty) {
+                                            return 'Please enter some text';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                buttons: [
+                                  DialogButton(
+                                    color: Colors.redAccent,
+                                    onPressed: () async {
+                                      // if (_formKey.currentState.validate()) {
+                                      //   _register();
+                                      // }
+                                    },
+                                    child: Text(
+                                      "Submit",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  )
+                                ]).show();
+                          },
                           child: Row(
                             children: [
                               Icon(

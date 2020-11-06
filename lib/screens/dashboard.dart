@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:substation_app/screens/homescreen.dart';
+import 'package:substation_app/models/sign_in.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -17,7 +20,13 @@ class _DashBoardState extends State<DashBoard> {
               color: Colors.black87,
               size: 30.0,
             ),
-            onPressed: () {},
+            onPressed: () {
+              signOutGoogle();
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) {
+                return HomeScreen();
+              }), ModalRoute.withName('/'));
+            },
           ),
           actions: [
             // IconButton(onPressed: () {  }, icon:Icon(
