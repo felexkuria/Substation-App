@@ -44,12 +44,12 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/fonts/Pacifico-Regular.ttf
-    - assets/fonts/Quicksand-Bold.ttf
-    - assets/fonts/Quicksand-Regular.ttf
-    - assets/images/background.png
-    - assets/images/facebook_logo.jpg
-    - assets/images/google_logo.png
+    # - assets/fonts/Pacifico-Regular.ttf
+    # - assets/fonts/Quicksand-Bold.ttf
+    # - assets/fonts/Quicksand-Regular.ttf
+    - assets/images/
+    # - assets/images/
+    # - assets/images/
   fonts:
     - family: Pacifico
       fonts:

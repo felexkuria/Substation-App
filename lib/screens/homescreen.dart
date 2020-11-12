@@ -7,8 +7,8 @@ import 'package:substation_app/screens/dashboard.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
-bool _success;
-String _userEmail;
+// bool _success;
+// String _userEmail;
 
 class HomeScreen extends StatefulWidget {
   @override
