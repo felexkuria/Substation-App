@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PersonCard extends StatelessWidget {
-  PersonCard({this.radii, this.font, this.name, this.shift});
+  PersonCard({this.radii, this.font, this.name, this.shift,this.profile});
   final double radii;
   final double font;
   final String name;
   final String shift;
+  final AssetImage profile;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,7 +14,7 @@ class PersonCard extends StatelessWidget {
         CircleAvatar(
           radius: radii,
           foregroundColor: Color(0xFFFFFFFF),
-          backgroundImage: AssetImage('assets/images/profile.jpg'),
+          backgroundImage: profile,
         ),
         Text(
           name,

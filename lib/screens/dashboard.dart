@@ -4,8 +4,10 @@ import 'package:substation_app/models/sign_in.dart';
 import 'package:substation_app/widgets/select_card.dart';
 import 'package:substation_app/widgets/person_card.dart';
 
-const inActiveCardColor = Color(0xFF3B1F83);
-const activeCardColor = Color(0xFFFBFCFF);
+enum Time { month, today, quarter }
+
+const inActiveCardColor = Color(0xFFF9FAFC);
+const activeCardColor = Color(0xFFFB5873);
 
 class DashBoard extends StatefulWidget {
   @override
@@ -13,12 +15,13 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  Time selectedTime;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color(0xFF585757),
+        backgroundColor: Color(0xFF343150),
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(
@@ -53,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
               ),
             )
           ],
-          backgroundColor: Color(0xFF210472),
+          backgroundColor: Color(0xFF3A3756),
           title: Text(
             'Substation App',
             style: TextStyle(
@@ -66,6 +69,8 @@ class _DashBoardState extends State<DashBoard> {
           ),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.only(top: 20.0),
@@ -77,6 +82,8 @@ class _DashBoardState extends State<DashBoard> {
                     font: 18.0,
                     name: 'Wycliffe Wanyama',
                     shift: 'OnShift',
+
+                    profile: AssetImage('assets/images/wycliffe.jpg'),
                   ),
                   SizedBox(
                     height: 10.0,
@@ -85,6 +92,7 @@ class _DashBoardState extends State<DashBoard> {
                     radii: 35.0,
                     font: 18.0,
                     name: 'Felex Kuria',
+                    profile: AssetImage('assets/images/profile.jpg'),
                     shift: 'Rest',
                   ),
                   SizedBox(
@@ -95,6 +103,7 @@ class _DashBoardState extends State<DashBoard> {
                     font: 18.0,
                     name: 'Leonard',
                     shift: 'Rest',
+                    profile: AssetImage('assets/images/leonard.jpg'),
                   ),
                 ],
               ),
@@ -105,19 +114,58 @@ class _DashBoardState extends State<DashBoard> {
                 Expanded(
                   child: Container(
                     // color: Color(0xFF3B1F83),
+                    margin: EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 20.0),
+
                     decoration: BoxDecoration(
-                      color: Color(0xFF3B1F83),
+                      color: inActiveCardColor,
+                        // Color(0xFF3A3756)
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Row(
                       children: [
                         /**Extract widget in their folder widget */
                         SelectCard(
-                          time: 'Today',
-                          color: activeCardColor,
+                          time: "Today",
+                          color: selectedTime == Time.today
+                              ? activeCardColor
+                              : inActiveCardColor,
+                          fontColor: selectedTime == Time.today
+                              ? inActiveCardColor
+                              : activeCardColor,
+                          onPressed: () {
+                            setState(() {
+                              selectedTime = Time.today;
+                            });
+                          },
                         ),
-                        SelectCard(time: 'Month', color: inActiveCardColor),
-                        SelectCard(time: 'Quarter', color: inActiveCardColor)
+                        SelectCard(
+                          time: "Month",
+                          color: selectedTime == Time.month
+                              ? activeCardColor
+                              : inActiveCardColor,
+                          fontColor: selectedTime == Time.month
+                              ? inActiveCardColor
+                              : activeCardColor,
+                          onPressed: () {
+                            setState(() {
+                              selectedTime = Time.month;
+                            });
+                          },
+                        ),
+                        SelectCard(
+                          time: "Quarter",
+                          color: selectedTime == Time.quarter
+                              ? activeCardColor
+                              : inActiveCardColor,
+                          fontColor: selectedTime == Time.quarter
+                              ? inActiveCardColor
+                              : activeCardColor,
+                          onPressed: () {
+                            setState(() {
+                              selectedTime = Time.quarter;
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -125,26 +173,56 @@ class _DashBoardState extends State<DashBoard> {
               ],
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
                     ' Pending Readings',
                     style: TextStyle(
-                        color: activeCardColor,
-                        letterSpacing: 1.2,
+                        color: inActiveCardColor,
+                        letterSpacing: 1.0,
                         fontFamily: 'Quicksand',
                         fontWeight: FontWeight.bold,
-                        fontSize: 25.0),
+                        fontSize: 20.0),
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
                   height: 120.0,
                   decoration: BoxDecoration(
-                      color: activeCardColor,
+                      color:  inActiveCardColor,
                       borderRadius: BorderRadius.circular(15.0),
-                       boxShadow: [
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
+                      ]),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                  height: 120.0,
+                  decoration: BoxDecoration(
+                      color:  inActiveCardColor,
+                      borderRadius: BorderRadius.circular(15.0),
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
+                      ]),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                  decoration: BoxDecoration(
+                      color:  inActiveCardColor,
+                      borderRadius: BorderRadius.circular(15.0),
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
+                      ]),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+                  height: 120.0,
+                  decoration: BoxDecoration(
+                      color:  inActiveCardColor,
+                      borderRadius: BorderRadius.circular(15.0),
+                      boxShadow: [
                         BoxShadow(color: Colors.grey, blurRadius: 10.0)
                       ]),
                 )

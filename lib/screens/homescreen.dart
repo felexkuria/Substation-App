@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:substation_app/models/sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:substation_app/screens/dashboard.dart';
+import 'package:substation_app/services/auth.dart';
+import 'package:substation_app/widgets/custom_text_field.dart';
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
-// bool _success;
-// String _userEmail;
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+bool _autoValidate = true;
+String _email;
+String _password;
+String _displayName;
+bool _loading = false;
+
+String errorMsg = "";
+
+
+
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,6 +24,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+ // AuthResult _authResult =AuthResult();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
               constraints: BoxConstraints.expand(),
-              child: SafeArea(
+              child: Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -67,46 +77,60 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {
                             Alert(
                                 context: context,
-                                title: "LOGIN",
+                                title: "Register",
                                 content: Padding(
                                   padding: EdgeInsets.all(16.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: <Widget>[
-                                      TextFormField(
-                                        controller: _emailController,
-                                        decoration: const InputDecoration(
-                                            labelText: 'Email'),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
-                                            return 'Please enter some text';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                      TextFormField(
-                                        controller: _passwordController,
-                                        decoration: const InputDecoration(
-                                            labelText: 'Password'),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
-                                            return 'Please enter some text';
-                                          }
-                                          return null;
-                                        },
-                                      ),
+                                    Form(
+                                    key: _formKey,
+                                    autovalidate: _autoValidate,
+                                    child: Column(
+                                      children: <Widget>[
+                                        CustomTextField(
+                                          onSaved: (input) {
+                                            _email = input;
+                                          },
+                                          // validator: emailValidator,
+                                          icon: Icon(Icons.email),
+                                          hint: "EMAIL",
+                                        ),
+                                        SizedBox(height: 20.0,),
+                                        CustomTextField(
+                                          icon: Icon(Icons.lock),
+                                          obsecure: true,
+                                          onSaved: (input) => _password = input,
+                                          validator: (input) => input.isEmpty ? "*Required" : null,
+                                          hint: "PASSWORD",
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+
+
+
+
+
                                     ],
                                   ),
                                 ),
                                 buttons: [
                                   DialogButton(
                                     color: Colors.redAccent,
-                                    onPressed: () async {
-                                      // if (_formKey.currentState.validate()) {
-                                      //   _register();
-                                      // }
-                                    },
+                                    onPressed: (){},
+                                    // onPressed: () async {
+                                    //   dynamic result =await _authResult.signInAnon();
+                                    //   if (result ==null){
+                                    //     print('Error signing');
+                                    //   }else{
+                                    //     print(result);
+                                    //     print('signed in');
+                                    //   }
+
+                                    // },
                                     child: Text(
                                       "Submit",
                                       style: TextStyle(
@@ -125,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 30.0,
                               ),
                               Text(
-                                'Continue With Email',
+                                'Register With Email',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20.0),
                               )
@@ -238,3 +262,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

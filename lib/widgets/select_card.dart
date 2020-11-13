@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
 
 class SelectCard extends StatelessWidget {
-  SelectCard({this.time, this.color});
+  SelectCard({@required this.time, this.color, this.fontColor, this.onPressed});
   final String time;
   final Color color;
+  final Color fontColor;
+  final Function onPressed;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Center(
-            child: Text(
-              time,
-              style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontSize: 20.0,
-                  letterSpacing: 1.2,
-                  color: Color(0xFF3B1F83)),
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(
+                time,
+                style: TextStyle(
+                    fontFamily: 'Pacifico',
+                    fontSize: 20.0,
+                    letterSpacing: 1.2,
+                    color: fontColor),
+              ),
             ),
           ),
-        ),
-        decoration: BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.circular(50.0),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(50.0),
+          ),
         ),
       ),
     );
