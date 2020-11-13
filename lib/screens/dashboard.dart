@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:substation_app/screens/homescreen.dart';
 import 'package:substation_app/models/sign_in.dart';
+import 'package:substation_app/widgets/select_card.dart';
+import 'package:substation_app/widgets/person_card.dart';
+
+const inActiveCardColor = Color(0xFF3B1F83);
+const activeCardColor = Color(0xFFFBFCFF);
 
 class DashBoard extends StatefulWidget {
   @override
@@ -62,6 +67,38 @@ class _DashBoardState extends State<DashBoard> {
         ),
         body: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  PersonCard(
+                    radii: 60.0,
+                    font: 18.0,
+                    name: 'Wycliffe Wanyama',
+                    shift: 'OnShift',
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  PersonCard(
+                    radii: 35.0,
+                    font: 18.0,
+                    name: 'Felex Kuria',
+                    shift: 'Rest',
+                  ),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  PersonCard(
+                    radii: 35.0,
+                    font: 18.0,
+                    name: 'Leonard',
+                    shift: 'Rest',
+                  ),
+                ],
+              ),
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -74,169 +111,44 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                     child: Row(
                       children: [
-                        Expanded(
-                          child: Container(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text(
-                                  'Today',
-                                  style: TextStyle(
-                                      fontFamily: 'Pacifico',
-                                      fontSize: 20.0,
-                                      letterSpacing: 1.2,
-                                      color: Color(0xFF3B1F83)),
-                                ),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFFFFFFF),
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                          ),
+                        /**Extract widget in their folder widget */
+                        SelectCard(
+                          time: 'Today',
+                          color: activeCardColor,
                         ),
-                        Expanded(
-                          child: Container(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text(
-                                  'Month',
-                                  style: TextStyle(
-                                      fontFamily: 'Pacifico',
-                                      fontSize: 20.0,
-                                      letterSpacing: 1.2,
-                                      color: Color(0xFFFAFAFA)),
-                                ),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF3B1F83),
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text(
-                                  'Quarter',
-                                  style: TextStyle(
-                                      fontFamily: 'Pacifico',
-                                      fontSize: 20.0,
-                                      letterSpacing: 1.2,
-                                      color: Color(0xFFFFFFFF)),
-                                ),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF3B1F83),
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                          ),
-                        ),
+                        SelectCard(time: 'Month', color: inActiveCardColor),
+                        SelectCard(time: 'Quarter', color: inActiveCardColor)
                       ],
                     ),
                   ),
                 )
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 60.0,
-                        foregroundColor: Color(0xFFFFFFFF),
-                        backgroundImage:
-                            AssetImage('assets/images/profile.jpg'),
-                      ),
-                      Text(
-                        'Felex Kuria',
-                        style: TextStyle(
-                            fontFamily: 'Quicksand',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                            color: Color(0xFFFFFFFF)),
-                      ),
-                      Text(
-                        'OnShift',
-                        style: TextStyle(
-                            fontFamily: 'Pacifico',
-                            fontSize: 20.0,
-                            letterSpacing: 1.2,
-                            color: Color(0xFFFFFFFF)),
-                      ),
-                    ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Text(
+                    ' Pending Readings',
+                    style: TextStyle(
+                        color: activeCardColor,
+                        letterSpacing: 1.2,
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0),
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 35.0,
-                        foregroundColor: Color(0xFFFFFFFF),
-                        backgroundImage:
-                            AssetImage('assets/images/profile.jpg'),
-                      ),
-                      Text(
-                        'Felex Kuria',
-                        style: TextStyle(
-                            fontFamily: 'Quicksand',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                            color: Color(0xFFFFFFFF)),
-                      ),
-                      Text(
-                        'Rest',
-                        style: TextStyle(
-                            fontFamily: 'Pacifico',
-                            fontSize: 20.0,
-                            letterSpacing: 1.2,
-                            color: Color(0xFFFFFFFF)),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 35.0,
-                        foregroundColor: Color(0xFFFFFFFF),
-                        backgroundImage:
-                            AssetImage('assets/images/profile.jpg'),
-                      ),
-                      Text(
-                        'Felex Kuria',
-                        style: TextStyle(
-                            fontFamily: 'Quicksand',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                            color: Color(0xFFFFFFFF)),
-                      ),
-                      Text(
-                        'Rest',
-                        style: TextStyle(
-                            fontFamily: 'Pacifico',
-                            fontSize: 20.0,
-                            letterSpacing: 1.2,
-                            color: Color(0xFFFFFFFF)),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  height: 120.0,
+                  decoration: BoxDecoration(
+                      color: activeCardColor,
+                      borderRadius: BorderRadius.circular(15.0),
+                       boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
+                      ]),
+                )
+              ],
             )
           ],
         ),
