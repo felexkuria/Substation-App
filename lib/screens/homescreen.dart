@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:substation_app/models/sign_in.dart';
 import 'package:substation_app/screens/dashboard.dart';
-import 'package:substation_app/services/auth.dart';
+import 'package:substation_app/services/sign_in.dart';
 import 'package:substation_app/widgets/custom_text_field.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _autoValidate = true;
 String _email;
 String _password;
-String _displayName;
-bool _loading = false;
-
-String errorMsg = "";
-
-
-
-
+// String _displayName;
+// bool _loading = false;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,7 +19,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
- // AuthResult _authResult =AuthResult();
+  // get http => null;
+
+  // AuthResult _authResult =AuthResult();
 
   @override
   Widget build(BuildContext context) {
@@ -84,53 +81,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: <Widget>[
-                                    Form(
-                                    key: _formKey,
-                                    autovalidate: _autoValidate,
-                                    child: Column(
-                                      children: <Widget>[
-                                        CustomTextField(
-                                          onSaved: (input) {
-                                            _email = input;
-                                          },
-                                          // validator: emailValidator,
-                                          icon: Icon(Icons.email),
-                                          hint: "EMAIL",
+                                      Form(
+                                        key: _formKey,
+                                        // ignore: deprecated_member_use
+                                        autovalidate: _autoValidate,
+                                        child: Column(
+                                          children: <Widget>[
+                                            CustomTextField(
+                                              onSaved: (input) {
+                                                _email = input;
+                                              },
+                                              // validator: emailValidator,
+                                              icon: Icon(Icons.email),
+                                              hint: "EMAIL",
+                                            ),
+                                            SizedBox(
+                                              height: 20.0,
+                                            ),
+                                            CustomTextField(
+                                              icon: Icon(Icons.lock),
+                                              obsecure: true,
+                                              onSaved: (input) =>
+                                                  _password = input,
+                                              validator: (input) =>
+                                                  input.isEmpty
+                                                      ? "*Required"
+                                                      : null,
+                                              hint: "PASSWORD",
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(height: 20.0,),
-                                        CustomTextField(
-                                          icon: Icon(Icons.lock),
-                                          obsecure: true,
-                                          onSaved: (input) => _password = input,
-                                          validator: (input) => input.isEmpty ? "*Required" : null,
-                                          hint: "PASSWORD",
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-
-
-
-
-
+                                      ),
                                     ],
                                   ),
                                 ),
                                 buttons: [
                                   DialogButton(
                                     color: Colors.redAccent,
-                                    onPressed: (){},
-                                    // onPressed: () async {
-                                    //   dynamic result =await _authResult.signInAnon();
-                                    //   if (result ==null){
-                                    //     print('Error signing');
-                                    //   }else{
-                                    //     print(result);
-                                    //     print('signed in');
-                                    //   }
-
-                                    // },
+                                    onPressed: () {
+                                      userSignIn();
+                                    },
                                     child: Text(
                                       "Submit",
                                       style: TextStyle(
@@ -245,12 +235,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    Text(
-                      'Already a Member? Login',
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          letterSpacing: 0.25,
-                          color: Colors.white),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        'Already a Member? Login',
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            letterSpacing: 0.25,
+                            color: Colors.white),
+                      ),
                     )
                   ],
                 ),
@@ -262,4 +255,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

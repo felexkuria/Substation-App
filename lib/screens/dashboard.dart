@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:substation_app/screens/homescreen.dart';
 import 'package:substation_app/models/sign_in.dart';
+import 'package:substation_app/widgets/reading_card.dart';
 import 'package:substation_app/widgets/select_card.dart';
 import 'package:substation_app/widgets/person_card.dart';
 
 enum Time { month, today, quarter }
 
 const inActiveCardColor = Color(0xFFF9FAFC);
-const activeCardColor = Color(0xFFFB5873);
+const activeCardColor = Color(0xFF343150);
+// const selectorCardColor =Color(0xFF343150);  Color(0xFF343150)
 
 class DashBoard extends StatefulWidget {
   @override
@@ -57,6 +59,7 @@ class _DashBoardState extends State<DashBoard> {
             )
           ],
           backgroundColor: Color(0xFF3A3756),
+          elevation: 5.0,
           title: Text(
             'Substation App',
             style: TextStyle(
@@ -82,11 +85,10 @@ class _DashBoardState extends State<DashBoard> {
                     font: 18.0,
                     name: 'Wycliffe Wanyama',
                     shift: 'OnShift',
-
                     profile: AssetImage('assets/images/wycliffe.jpg'),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    width: 10.0,
                   ),
                   PersonCard(
                     radii: 35.0,
@@ -118,7 +120,7 @@ class _DashBoardState extends State<DashBoard> {
 
                     decoration: BoxDecoration(
                       color: inActiveCardColor,
-                        // Color(0xFF3A3756)
+                      // Color(0xFF3A3756)
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Row(
@@ -187,45 +189,15 @@ class _DashBoardState extends State<DashBoard> {
                         fontSize: 20.0),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
-                  height: 120.0,
-                  decoration: BoxDecoration(
-                      color:  inActiveCardColor,
-                      borderRadius: BorderRadius.circular(15.0),
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
-                      ]),
+                ReadingCard(
+                  reading: '0800Hrs Reading',
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  height: 120.0,
-                  decoration: BoxDecoration(
-                      color:  inActiveCardColor,
-                      borderRadius: BorderRadius.circular(15.0),
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
-                      ]),
+                ReadingCard(
+                  reading: '1400Hrs Reading',
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  decoration: BoxDecoration(
-                      color:  inActiveCardColor,
-                      borderRadius: BorderRadius.circular(15.0),
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
-                      ]),
+                ReadingCard(
+                  reading: '2000Hrs Reading',
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
-                  height: 120.0,
-                  decoration: BoxDecoration(
-                      color:  inActiveCardColor,
-                      borderRadius: BorderRadius.circular(15.0),
-                      boxShadow: [
-                        BoxShadow(color: Colors.grey, blurRadius: 10.0)
-                      ]),
-                )
               ],
             )
           ],
