@@ -13,15 +13,17 @@ class SelectCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
+
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Center(
               child: Text(
                 time,
                 style: TextStyle(
-                    fontFamily: 'Pacifico',
+                    fontFamily: 'Quicksand',
                     fontSize: 20.0,
                     letterSpacing: 1.2,
+                    fontWeight: FontWeight.w300,
                     color: fontColor),
               ),
             ),

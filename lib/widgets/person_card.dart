@@ -29,7 +29,8 @@ class PersonCard extends StatelessWidget {
         Text(
           shift,
           style: TextStyle(
-              fontFamily: 'Pacifico',
+              fontFamily: 'Quicksand',
+              fontWeight: FontWeight.w100,
               fontSize: 20.0,
               letterSpacing: 1.2,
               color: Color(0xFFFFFFFF)),

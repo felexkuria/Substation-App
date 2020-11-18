@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField(
+
       {this.icon,
+        this.onChanged,
         this.hint,
         this.obsecure = false,
         this.validator,
@@ -11,13 +13,19 @@ class CustomTextField extends StatelessWidget {
   final Icon icon;
   final String hint;
   final bool obsecure;
+  final FormFieldSetter<String> onChanged;
+
   final FormFieldValidator<String> validator;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 20, right: 20),
       child: TextFormField(
+
         onSaved: onSaved,
+        onChanged: onChanged,
+
+
         validator: validator,
         autofocus: true,
         obscureText: obsecure,
@@ -37,7 +45,7 @@ class CustomTextField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
               borderSide: BorderSide(
-                color: Colors.grey,
+                color: Color(0xFF343150),
                 width: 3,
               ),
             ),

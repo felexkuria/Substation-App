@@ -1,37 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:substation_app/main.dart';
+import 'package:substation_app/screens/dashboard.dart';
 
 const inActiveCardColor = Color(0xFFF9FAFC);
 const activeCardColor = Color(0xFF343150);
 
 class ReadingCard extends StatelessWidget {
-  ReadingCard({this.reading});
+  ReadingCard({this.reading, this.status, this.fontW, this.onPressed});
   final String reading;
+  final String status;
+  final FontWeight fontW;
+  final Function onPressed;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              reading,
-              style: TextStyle(
-                  color: activeCardColor,
-                  letterSpacing: 1.0,
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Center(
+              child: Text(
+                reading,
+                style: TextStyle(
+                    color: activeCardColor,
+                    letterSpacing: 1.0,
+                    fontFamily: 'Quicksand',
+                    fontWeight: fontW,
+                    fontSize: 18.0),
+              ),
             ),
-          ),
-        ],
+            Center(
+              child: Text(
+                status,
+                style: TextStyle(
+                    color: activeCardColor,
+                    letterSpacing: 0.5,
+                    fontFamily: 'Quicksand',
+                    fontWeight: fontW,
+                    fontSize: 16.0),
+              ),
+            ),
+            FlatButton.icon(
+                onPressed: onPressed,
+                icon: Icon(
+                  Icons.add,
+                  size: 30.0,
+                ),
+                label: Text('Take Readings'))
+          ],
+        ),
+        margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 8.0),
+        height: 110.0,
+        decoration: BoxDecoration(
+            color: inActiveCardColor,
+            borderRadius: BorderRadius.circular(15.0),
+            boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)]),
       ),
-      margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 8.0),
-      height: 120.0,
-      decoration: BoxDecoration(
-          color: inActiveCardColor,
-          borderRadius: BorderRadius.circular(15.0),
-          boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)]),
     );
   }
 }

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:substation_app/screens/dashboard.dart';
 import 'package:substation_app/screens/homescreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:substation_app/screens/reading_screen.dart';
+
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: '/',
+    routes: {
+      '/':(context)=>HomeScreen(),
+      '/dashboard':(context)=>DashBoard(),
+      '/reading':(context)=>ReadingScreen(),
+    },
+
+  ));
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
 
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
-    );
-  }
-}
+
