@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
     setState(() {
-      _loading=false;
+      _loading = false;
     });
   }
 
@@ -158,8 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CustomTextField(
                                             icon: Icon(Icons.lock),
                                             // obsecure: true,
-                                            onSaved: (input) =>
-                                            _name = input,
+                                            onSaved: (input) => _name = input,
                                             validator: (input) => input.isEmpty
                                                 ? "*Required"
                                                 : null,
@@ -249,7 +248,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               content: Padding(
                                 padding: EdgeInsets.all(16.0),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: <Widget>[
                                     Form(
                                       key: _formKey,
@@ -272,19 +272,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                             icon: Icon(Icons.lock),
                                             obsecure: true,
                                             onSaved: (input) => _name = input,
-                                            validator: (input) =>
-                                            input.isEmpty ? "*Required" : null,
+                                            validator: (input) => input.isEmpty
+                                                ? "*Required"
+                                                : null,
                                             hint: "USERNAME",
                                           ),
                                           SizedBox(
                                             height: 20.0,
                                           ),
                                           CustomTextField(
-                                            icon: Icon(Icons.account_box_rounded),
+                                            icon:
+                                                Icon(Icons.account_box_rounded),
                                             // obsecure: true,
                                             onSaved: (input) => _email = input,
-                                            validator: (input) =>
-                                            input.isEmpty ? "*Required" : null,
+                                            validator: (input) => input.isEmpty
+                                                ? "*Required"
+                                                : null,
                                             hint: "EMAIL",
                                           ),
                                           SizedBox(
@@ -293,9 +296,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                           CustomTextField(
                                             icon: Icon(Icons.lock),
                                             obsecure: true,
-                                            onSaved: (input) => _password = input,
-                                            validator: (input) =>
-                                            input.isEmpty ? "*Required" : null,
+                                            onSaved: (input) =>
+                                                _password = input,
+                                            validator: (input) => input.isEmpty
+                                                ? "*Required"
+                                                : null,
                                             hint: "PASSWORD",
                                           ),
                                         ],
@@ -312,16 +317,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: _loading == false
                                       ? Text(
-                                    "Submit",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  )
+                                          "Submit",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        )
                                       : CircularProgressIndicator(
-                                    backgroundColor: Colors.red,
-                                  ),
+                                          backgroundColor: Colors.red,
+                                        ),
                                 ),
                               ]);
-
                         },
                         child: Row(
                           children: [
@@ -360,17 +365,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.all(16.0),
                         color: Colors.white,
                         onPressed: () {
-                          signInWithGoogle()
-                              .whenComplete(() {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  // return null;
-                                  return DashBoard();
-                                },
-                              ),
-                            );
-                          });
+                          Navigator.pushNamed(context, '/dashboard');
+                          // signInWithGoogle()
+                          //     .whenComplete(() {
+                          //   Navigator.of(context).push(
+                          //     MaterialPageRoute(
+                          //       builder: (context) {
+                          //         // return null;
+                          //         return DashBoard();
+                          //       },
+                          //     ),
+                          //   );
+                          // });
                         },
                         child: Row(
                           children: [
@@ -412,23 +418,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: <Widget>[
                                       CustomTextField(
-
-
                                         onSaved: (input) {
                                           _email = input;
                                         },
                                         // validator: emailValidator,
                                         icon: Icon(Icons.email),
                                         hint: "EMAIL",
-                                        onChanged:(validator) {
-                                          setState(()
-                                              =>_email=validator
-
-                                          );
-
+                                        onChanged: (validator) {
+                                          setState(() => _email = validator);
                                         },
                                       ),
-
                                       SizedBox(
                                         height: 20.0,
                                       ),
@@ -468,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Text(
                       'Already a Member? Login',
                       style: TextStyle(
-                          fontSize:20.0,
+                          fontSize: 20.0,
                           letterSpacing: 0.25,
                           color: Colors.white),
                     ),

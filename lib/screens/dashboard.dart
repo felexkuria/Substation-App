@@ -19,6 +19,7 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   Time selectedTime;
+  DateTime dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +34,6 @@ class _DashBoardState extends State<DashBoard> {
               size: 30.0,
             ),
             onPressed: () {
-
               // signOutGoogle();
               // Navigator.of(context).pushAndRemoveUntil(
               //     MaterialPageRoute(builder: (context) {
@@ -78,12 +78,15 @@ class _DashBoardState extends State<DashBoard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                PersonCard(
-                  radii: 60.0,
-                  font: 18.0,
-                  name: 'Wycliffe Wanyama',
-                  shift: 'OnShift',
-                  profile: AssetImage('assets/images/wycliffe.jpg'),
+                Hero(
+                  tag: 'wanyama',
+                  child: PersonCard(
+                    radii: 60.0,
+                    font: 18.0,
+                    name: 'Wycliffe Wanyama',
+                    shift: 'OnShift',
+                    profile: AssetImage('assets/images/wycliffe.jpg'),
+                  ),
                 ),
                 SizedBox(
                   width: 10.0,
@@ -107,7 +110,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ],
             ),
-
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -116,7 +118,6 @@ class _DashBoardState extends State<DashBoard> {
                   children: [
                     Expanded(
                       child: Container(
-
                         // color: Color(0xFF3B1F83),
                         margin: EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 20.0),
 
@@ -192,17 +193,15 @@ class _DashBoardState extends State<DashBoard> {
                   reading: '0800Hrs Reading',
                   status: 'FINISHED',
                   fontW: FontWeight.bold,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, '/reading');
                   },
-
-
                 ),
                 ReadingCard(
                   reading: '1400Hrs Reading',
                   status: 'PENDING',
                   fontW: FontWeight.w300,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, '/reading');
                   },
                 ),
@@ -210,7 +209,7 @@ class _DashBoardState extends State<DashBoard> {
                   reading: '2000Hrs Reading',
                   status: 'PENDING',
                   fontW: FontWeight.w300,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, '/reading');
                   },
                 ),

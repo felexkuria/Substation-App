@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:substation_app/constants/constant.dart';
 import 'package:substation_app/main.dart';
 import 'package:substation_app/screens/dashboard.dart';
 
@@ -17,19 +18,11 @@ class ReadingCard extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Center(
-              child: Text(
-                reading,
-                style: TextStyle(
-                    color: activeCardColor,
-                    letterSpacing: 1.0,
-                    fontFamily: 'Quicksand',
-                    fontWeight: fontW,
-                    fontSize: 18.0),
-              ),
+              child: Text(reading, style: kNamestyle),
             ),
             Center(
               child: Text(
@@ -51,8 +44,9 @@ class ReadingCard extends StatelessWidget {
                 label: Text('Take Readings'))
           ],
         ),
-        margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 8.0),
-        height: 110.0,
+        // margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
+        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+        // height: 110.0,
         decoration: BoxDecoration(
             color: inActiveCardColor,
             borderRadius: BorderRadius.circular(15.0),

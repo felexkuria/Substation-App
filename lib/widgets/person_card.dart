@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PersonCard extends StatelessWidget {
-  PersonCard({this.radii, this.font, this.name, this.shift,this.profile});
+  PersonCard({this.radii, this.font, this.name, this.shift, this.profile});
   final double radii;
   final double font;
   final String name;
