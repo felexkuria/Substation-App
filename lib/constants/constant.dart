@@ -15,7 +15,7 @@ const kInputdecoration = InputDecoration(
     fillColor: Colors.white,
     prefixIcon: Icon(
       Icons.wb_incandescent,
-      color: Colors.redAccent,
+      color: Color(0xFF343150),
       size: 30.0,
     ),
     border: OutlineInputBorder(
@@ -34,12 +34,34 @@ const kInputdecoration = InputDecoration(
 const kReactivedecoration = InputDecoration(
   prefixIcon: Icon(
     Icons.ac_unit,
-    color: Colors.blueAccent,
+    color: Color(0xFF343150),
     size: 30.0,
   ),
   filled: true,
   fillColor: Colors.white,
   hintText: 'Enter Reactive Power',
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(30.0),
+    ),
+    borderSide: BorderSide(width: 0.8),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(30.0),
+    ),
+    borderSide: BorderSide(width: 0.8, color: activeCardColor),
+  ),
+);
+const kTimedecoration = InputDecoration(
+  prefixIcon: Icon(
+    Icons.alarm_on,
+    color: Color(0xFF343150),
+    size: 30.0,
+  ),
+  filled: true,
+  fillColor: Colors.white,
+  hintText: 'Select Time of the Readings',
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(30.0),

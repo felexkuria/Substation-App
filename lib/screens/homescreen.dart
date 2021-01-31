@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'file:///C:/Users/User/Documents/Project%20Genesis/Android%20Projects/Flutter/substation_app/lib/services/sign_in.dart';
-import 'package:substation_app/screens/dashboard.dart';
 import 'package:substation_app/widgets/custom_text_field.dart';
 import 'package:http/http.dart' as http;
 

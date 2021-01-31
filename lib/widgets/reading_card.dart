@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:substation_app/constants/constant.dart';
-import 'package:substation_app/main.dart';
-import 'package:substation_app/screens/dashboard.dart';
 
 const inActiveCardColor = Color(0xFFF9FAFC);
 const activeCardColor = Color(0xFF343150);

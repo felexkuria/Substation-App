@@ -19,6 +19,7 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   Time selectedTime;
   DateTime _date = DateTime.now();
+
   final DateFormat _dateFormatter = DateFormat.yMMMMEEEEd();
   void _handleDatetime() async {
     final DateTime dateTime = await showDatePicker(
@@ -57,7 +58,9 @@ class _DashBoardState extends State<DashBoard> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, 'worker');
+              },
               icon: Icon(
                 Icons.account_circle,
                 color: Color(0xFFFBFCFF),
@@ -107,6 +110,9 @@ class _DashBoardState extends State<DashBoard> {
                   width: 10.0,
                 ),
                 PersonCard(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'worker');
+                  },
                   radii: 35.0,
                   font: 18.0,
                   name: 'Felex Kuria',
@@ -118,6 +124,9 @@ class _DashBoardState extends State<DashBoard> {
                   width: 10.0,
                 ),
                 PersonCard(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'worker');
+                  },
                   radii: 35.0,
                   font: 18.0,
                   name: 'Leonard',

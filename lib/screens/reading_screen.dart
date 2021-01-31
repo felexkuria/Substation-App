@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:substation_app/widgets/custom_text_field.dart';
-import 'package:substation_app/widgets/person_card.dart';
 import 'package:substation_app/widgets/reading_card.dart';
 import 'package:substation_app/constants/constant.dart';
 
@@ -14,6 +13,7 @@ String processing;
 
 // String _displayName;
 bool _loading = false;
+TimeOfDay _timeOfDay = TimeOfDay.now();
 
 class ReadingScreen extends StatefulWidget {
   @override
@@ -21,6 +21,18 @@ class ReadingScreen extends StatefulWidget {
 }
 
 class _ReadingScreenState extends State<ReadingScreen> {
+  TextEditingController _timeController = TextEditingController();
+  void _handleTime() async {
+    final TimeOfDay timeOfDay =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (timeOfDay != null && timeOfDay != _timeOfDay) {
+      setState(() {
+        _timeOfDay = timeOfDay;
+      });
+      _timeController.text = _timeOfDay.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +56,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '1  of 7',
+                    _timeOfDay.toString(),
                     style: kLabelTextStyle,
                   )
                 ],
@@ -65,64 +77,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   status: 'PENDING',
                   fontW: FontWeight.w300,
                   onPressed: () {
-                    Alert(
-                        context: context,
-                        title: "Calculate N2 Reading",
-                        content: Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  TextField(
-                                    decoration: kInputdecoration,
-                                    onChanged: (validator) {
-                                      setState(() {
-                                        _activepower = validator;
-                                        processing = _activepower;
-                                        print(_activepower);
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 20.0,
-                                  ),
-                                  TextField(
-                                    decoration: kReactivedecoration,
-                                    // validator: emailValidator,
-
-                                    onChanged: (validator) {
-                                      setState(() {
-                                        _reactivepower = validator;
-                                        print(_reactivepower);
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        buttons: [
-                          DialogButton(
-                            color: Color(0xFF343150),
-                            onPressed: () {
-                              Navigator.popAndPushNamed(context, '/reading');
-                              print(_activepower);
-                              print(_reactivepower);
-                            },
-                            child: _loading == false
-                                ? Text(
-                                    "Calculate",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  )
-                                : CircularProgressIndicator(
-                                    backgroundColor: Colors.red,
-                                  ),
-                          ),
-                        ]).show();
+                    buildAlert(context).show();
                   },
                 ),
                 ReadingCard(
@@ -140,6 +95,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                             children: <Widget>[
                               Form(
                                 key: _formKey,
+                                // ignore: deprecated_member_use
                                 autovalidate: _autoValidate,
                                 child: Column(
                                   children: <Widget>[
@@ -208,6 +164,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                             children: <Widget>[
                               Form(
                                 key: _formKey,
+                                // ignore: deprecated_member_use
                                 autovalidate: _autoValidate,
                                 child: Column(
                                   children: <Widget>[
@@ -262,6 +219,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                             children: <Widget>[
                               Form(
                                 key: _formKey,
+                                // ignore: deprecated_member_use
                                 autovalidate: _autoValidate,
                                 child: Column(
                                   children: <Widget>[
@@ -316,6 +274,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                             children: <Widget>[
                               Form(
                                 key: _formKey,
+                                // ignore: deprecated_member_use
                                 autovalidate: _autoValidate,
                                 child: Column(
                                   children: <Widget>[
@@ -370,6 +329,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                             children: <Widget>[
                               Form(
                                 key: _formKey,
+                                // ignore: deprecated_member_use
                                 autovalidate: _autoValidate,
                                 child: Column(
                                   children: <Widget>[
@@ -413,5 +373,73 @@ class _ReadingScreenState extends State<ReadingScreen> {
             );
           },
         ));
+  }
+
+  Alert buildAlert(BuildContext context) {
+    return Alert(
+        context: context,
+        title: "Calculate N2 Reading",
+        content: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  TextField(
+                      readOnly: true,
+                      controller: _timeController,
+                      onTap: _handleTime,
+                      decoration: kTimedecoration),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  TextField(
+                    decoration: kInputdecoration,
+                    onChanged: (validator) {
+                      setState(() {
+                        _activepower = validator;
+                        processing = _activepower;
+                        print(_activepower);
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  TextField(
+                    decoration: kReactivedecoration,
+                    // validator: emailValidator,
+
+                    onChanged: (validator) {
+                      setState(() {
+                        _reactivepower = validator;
+                        print(_reactivepower);
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        buttons: [
+          DialogButton(
+            color: Color(0xFF343150),
+            onPressed: () {
+              Navigator.popAndPushNamed(context, '/reading');
+              print(_activepower);
+              print(_reactivepower);
+            },
+            child: _loading == false
+                ? Text(
+                    "Calculate",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )
+                : CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                  ),
+          ),
+        ]);
   }
 }

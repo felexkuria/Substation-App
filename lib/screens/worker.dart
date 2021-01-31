@@ -17,12 +17,22 @@ class Worker extends StatelessWidget {
               child: Hero(
                 tag: 'wanyama',
                 child: CircleAvatar(
-                  radius: 100.0,
+                  radius: 120.0,
                   backgroundImage: AssetImage("assets/images/wycliffe.jpg"),
                 ),
               ),
             ),
-          )
+          ),
+          Text(
+            'Wyclifffe Wanyama',
+            style: TextStyle(
+                fontFamily: 'Quicksand',
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+                color: Color(0xFFFFFFFF)),
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
