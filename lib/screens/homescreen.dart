@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             hint: "EMAIL",
                                           ),
                                           SizedBox(
-                                            height: 20.0,
+                                            height: 30.0,
                                           ),
                                           CustomTextField(
                                             icon: Icon(Icons.lock),
@@ -333,13 +333,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             Image(
                                 image: AssetImage(
                                     "assets/images/facebook_logo.jpg"),
-                                height: 35.0),
+                                height: 25.0),
                             // Icon(
                             //   Icons.fact_check,
                             //   color: Colors.white,
                             // ),
                             SizedBox(
-                              width: 30.0,
+                              width: 20.0,
                             ),
                             Text(
                               'Continue With Facebook',
@@ -383,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Image(
                                 image:
                                     AssetImage("assets/images/google_logo.png"),
-                                height: 35.0),
+                                height: 25.0),
                             // Icon(
                             //   Icons.add_to_drive,
                             //   color: Colors.black,

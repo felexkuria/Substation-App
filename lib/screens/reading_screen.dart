@@ -3,13 +3,14 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:substation_app/widgets/custom_text_field.dart';
 import 'package:substation_app/widgets/person_card.dart';
 import 'package:substation_app/widgets/reading_card.dart';
+import 'package:substation_app/constants/constant.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _autoValidate = true;
-String _activepower;
+String _activepower = '';
 String _reactivepower;
 int activepower;
-String _name;
+String processing;
 
 // String _displayName;
 bool _loading = false;
@@ -44,10 +45,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   ),
                   Text(
                     '1  of 7',
-                    style: TextStyle(
-                        color: Color(0xFFFBFCFF),
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w600),
+                    style: kLabelTextStyle,
                   )
                 ],
               );
@@ -59,56 +57,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   status: 'PENDING',
                   fontW: FontWeight.w300,
                   onPressed: () {
-                    Alert(
-                        context: context,
-                        title: "Calculate N1 Reading",
-                        content: Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Form(
-                                key: _formKey,
-                                autovalidate: _autoValidate,
-                                child: Column(
-                                  children: <Widget>[
-                                    CustomTextField(
-                                      onSaved: (input) {
-                                        _activepower = input;
-                                      },
-                                      // validator: emailValidator,
-                                      icon: Icon(Icons.wb_incandescent),
-                                      hint: "Active Power",
-                                      onChanged: (validator) {
-                                        setState(() {
-                                          // ignore: unnecessary_statements
-                                          _activepower * 1980;
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        buttons: [
-                          DialogButton(
-                            color: Color(0xFF343150),
-                            onPressed: () {
-                              print(_activepower);
-                            },
-                            child: _loading == false
-                                ? Text(
-                                    "Calculate",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  )
-                                : CircularProgressIndicator(
-                                    backgroundColor: Colors.red,
-                                  ),
-                          ),
-                        ]).show();
+                    //
                   },
                 ),
                 ReadingCard(
@@ -124,38 +73,33 @@ class _ReadingScreenState extends State<ReadingScreen> {
                           child: Column(
                             // crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
-                              Form(
-                                key: _formKey,
-                                autovalidate: _autoValidate,
-                                child: Column(
-                                  children: <Widget>[
-                                    CustomTextField(
-                                      onSaved: (input) {
-                                        _activepower = input;
-                                      },
-                                      // validator: emailValidator,
-                                      icon: Icon(Icons.wb_incandescent),
-                                      hint: "Active Power",
-                                      onChanged: (validator) {
-                                        setState(() => _activepower);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    CustomTextField(
-                                      onSaved: (input) {
-                                        _reactivepower = input;
-                                      },
-                                      // validator: emailValidator,
-                                      icon: Icon(Icons.ac_unit),
-                                      hint: "Reactive Power",
-                                      onChanged: (validator) {
-                                        setState(() => _reactivepower);
-                                      },
-                                    ),
-                                  ],
-                                ),
+                              Column(
+                                children: <Widget>[
+                                  TextField(
+                                    decoration: kInputdecoration,
+                                    onChanged: (validator) {
+                                      setState(() {
+                                        _activepower = validator;
+                                        processing = _activepower;
+                                        print(_activepower);
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  TextField(
+                                    decoration: kReactivedecoration,
+                                    // validator: emailValidator,
+
+                                    onChanged: (validator) {
+                                      setState(() {
+                                        _reactivepower = validator;
+                                        print(_reactivepower);
+                                      });
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -164,7 +108,9 @@ class _ReadingScreenState extends State<ReadingScreen> {
                           DialogButton(
                             color: Color(0xFF343150),
                             onPressed: () {
+                              Navigator.popAndPushNamed(context, '/reading');
                               print(_activepower);
+                              print(_reactivepower);
                             },
                             child: _loading == false
                                 ? Text(

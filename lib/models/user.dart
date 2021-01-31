@@ -1,6 +1,9 @@
-class User {
-  final String name;
-  final String shift;
+import 'package:flutter/widgets.dart';
 
-  User({this.name, this.shift});
+class User {
+  String name;
+  String shift;
+  String url;
+
+  User({this.name, this.shift, this.url});
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:substation_app/screens/homescreen.dart';
-import 'package:substation_app/services/sign_in.dart';
+import 'package:intl/intl.dart';
+import 'package:substation_app/widgets/person_card.dart';
 
 import 'package:substation_app/widgets/reading_card.dart';
 import 'package:substation_app/widgets/select_card.dart';
-import 'package:substation_app/widgets/person_card.dart';
 
 enum Time { month, today, quarter }
 
@@ -19,7 +18,22 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   Time selectedTime;
-  DateTime dateTime = DateTime.now();
+  DateTime _date = DateTime.now();
+  final DateFormat _dateFormatter = DateFormat.yMMMMEEEEd();
+  void _handleDatetime() async {
+    final DateTime dateTime = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2035),
+    );
+    if (dateTime != null && dateTime != _date) {
+      setState(() {
+        _date = dateTime;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -78,15 +92,16 @@ class _DashBoardState extends State<DashBoard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Hero(
-                  tag: 'wanyama',
-                  child: PersonCard(
-                    radii: 60.0,
-                    font: 18.0,
-                    name: 'Wycliffe Wanyama',
-                    shift: 'OnShift',
-                    profile: AssetImage('assets/images/wycliffe.jpg'),
-                  ),
+                PersonCard(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'worker');
+                  },
+                  radii: 40.0,
+                  font: 18.0,
+                  name: 'Wycliffe Wanyama',
+                  shift: 'OnShift',
+                  profile: AssetImage('assets/images/wycliffe.jpg'),
+                  taf: 'wanyama',
                 ),
                 SizedBox(
                   width: 10.0,
@@ -97,6 +112,7 @@ class _DashBoardState extends State<DashBoard> {
                   name: 'Felex Kuria',
                   profile: AssetImage('assets/images/profile.jpg'),
                   shift: 'Rest',
+                  taf: 'Felex',
                 ),
                 SizedBox(
                   width: 10.0,
@@ -107,6 +123,7 @@ class _DashBoardState extends State<DashBoard> {
                   name: 'Leonard',
                   shift: 'Rest',
                   profile: AssetImage('assets/images/leonard.jpg'),
+                  taf: 'Leonard',
                 ),
               ],
             ),
@@ -130,7 +147,7 @@ class _DashBoardState extends State<DashBoard> {
                           children: [
                             /**Extract widget in their folder widget */
                             SelectCard(
-                              time: "Today",
+                              time: _dateFormatter.format(_date),
                               color: selectedTime == Time.today
                                   ? activeCardColor
                                   : inActiveCardColor,
@@ -140,6 +157,7 @@ class _DashBoardState extends State<DashBoard> {
                               onPressed: () {
                                 setState(() {
                                   selectedTime = Time.today;
+                                  _handleDatetime();
                                 });
                               },
                             ),
@@ -177,42 +195,59 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(
-                    ' Pending Readings',
-                    style: TextStyle(
-                        color: inActiveCardColor,
-                        letterSpacing: 1.0,
-                        fontFamily: 'Quicksand',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20.0),
+                // ListView.builder(
+                //   itemCount: 2,
+                //   itemBuilder: (BuildContext context, int index) {
+                //     if (index == 0)
+                //       return Padding(
+                //         padding: EdgeInsets.symmetric(horizontal: 20.0),
+                //         child:
+                //       );
+
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        _dateFormatter.format(_date),
+                        style: TextStyle(
+                            color: inActiveCardColor,
+                            letterSpacing: 1.0,
+                            fontFamily: 'Quicksand',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20.0),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      ReadingCard(
+                        reading: '0800Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                      ReadingCard(
+                        reading: '1400Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                      ReadingCard(
+                        reading: '2000Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                    ],
                   ),
-                ),
-                ReadingCard(
-                  reading: '0800Hrs Reading',
-                  status: 'FINISHED',
-                  fontW: FontWeight.bold,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/reading');
-                  },
-                ),
-                ReadingCard(
-                  reading: '1400Hrs Reading',
-                  status: 'PENDING',
-                  fontW: FontWeight.w300,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/reading');
-                  },
-                ),
-                ReadingCard(
-                  reading: '2000Hrs Reading',
-                  status: 'PENDING',
-                  fontW: FontWeight.w300,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/reading');
-                  },
-                ),
+                )
+                //   },
+                // )
               ],
             )
           ],

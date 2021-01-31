@@ -13,7 +13,6 @@ class SelectCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Center(
@@ -25,6 +24,7 @@ class SelectCard extends StatelessWidget {
                     letterSpacing: 1.2,
                     fontWeight: FontWeight.w300,
                     color: fontColor),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
