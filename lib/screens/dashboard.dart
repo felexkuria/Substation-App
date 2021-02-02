@@ -233,7 +233,7 @@ class _DashBoardState extends State<DashBoard> {
                         status: 'PENDING',
                         fontW: FontWeight.w300,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/reading');
+                          //Navigator.pushNamed(context, '/reading');
                         },
                       ),
                       ReadingCard(
@@ -241,7 +241,7 @@ class _DashBoardState extends State<DashBoard> {
                         status: 'PENDING',
                         fontW: FontWeight.w300,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/reading');
+                          //Navigator.pushNamed(context, '/reading');
                         },
                       ),
                       ReadingCard(
@@ -249,7 +249,7 @@ class _DashBoardState extends State<DashBoard> {
                         status: 'PENDING',
                         fontW: FontWeight.w300,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/reading');
+                          // Navigator.pushNamed(context, '/reading');
                         },
                       ),
                     ],
@@ -258,8 +258,19 @@ class _DashBoardState extends State<DashBoard> {
                 //   },
                 // )
               ],
-            )
+            ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.add,
+            color: inActiveCardColor,
+            size: 30,
+          ),
+          backgroundColor: activeCardColor,
+          onPressed: () {
+            Navigator.pushNamed(context, '/reading');
+          },
         ),
       ),
     );
