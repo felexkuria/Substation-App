@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:substation_app/constants/constant.dart';
 
-const inActiveCardColor = Color(0xFFF9FAFC);
+const inActiveCardColor = Color(0xFFFEB95A);
 const activeCardColor = Color(0xFF343150);
 
 class ReadingCard extends StatelessWidget {
@@ -26,7 +26,7 @@ class ReadingCard extends StatelessWidget {
               child: Text(
                 status,
                 style: TextStyle(
-                    color: activeCardColor,
+                    color: Color(0xFFFFFFFF),
                     letterSpacing: 0.5,
                     fontFamily: 'Quicksand',
                     fontWeight: fontW,
@@ -34,21 +34,33 @@ class ReadingCard extends StatelessWidget {
               ),
             ),
             FlatButton.icon(
-                onPressed: onPressed,
-                icon: Icon(
-                  Icons.add,
-                  size: 30.0,
+              onPressed: onPressed,
+              icon: Icon(
+                Icons.add,
+                size: 20.0,
+                color: Color(0xFFFFFFFF),
+              ),
+              label: Text(
+                'Take Readings',
+                style: TextStyle(
+                  color: Color(0xFFFFFFFF),
                 ),
-                label: Text('Take Readings'))
+              ),
+            )
           ],
         ),
-        // margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
         margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-        // height: 110.0,
         decoration: BoxDecoration(
-            color: inActiveCardColor,
-            borderRadius: BorderRadius.circular(15.0),
-            boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10.0)]),
+          color: Color(0xFF070707),
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[900],
+              blurRadius: 6.0,
+              offset: Offset(0, 6),
+            ),
+          ],
+        ),
       ),
     );
   }
