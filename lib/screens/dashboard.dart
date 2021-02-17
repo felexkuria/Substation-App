@@ -506,6 +506,7 @@ class _DashBoardState extends State<DashBoard> {
                       SizedBox(
                         height: 20.0,
                       ),
+<<<<<<< HEAD
                       TextField(
                         controller: _activepowerController2,
                         decoration: kInputdecoration1,
@@ -531,10 +532,35 @@ class _DashBoardState extends State<DashBoard> {
 
                             print(_reactivepower660);
                           });
+=======
+                      ReadingCard(
+                        reading: '0800Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          //Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                      ReadingCard(
+                        reading: '1400Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          //Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                      ReadingCard(
+                        reading: '2000Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          // Navigator.pushNamed(context, '/reading');
+>>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
                         },
                       ),
                     ],
                   ),
+<<<<<<< HEAD
                 ),
                 buttons: [
                   DialogButton(
@@ -588,6 +614,25 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                   ),
                 ]).show();
+          },
+=======
+                )
+                //   },
+                // )
+              ],
+            ),
+          ],
+>>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.add,
+            color: inActiveCardColor,
+            size: 30,
+          ),
+          backgroundColor: activeCardColor,
+          onPressed: () {
+            Navigator.pushNamed(context, '/reading');
           },
         ),
       ),

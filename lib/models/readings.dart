@@ -13,9 +13,15 @@ class Readings {
 
   String getActivePower({double activePower, double activePower1}) {
     result = ((activePower - activePower1) * activePowerCode1);
+<<<<<<< HEAD
     //result.round();
 
     return result.toStringAsFixed(2);
+=======
+    print(activePower1);
+
+    return result.toString();
+>>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
 
     //print(result);
   }
@@ -32,9 +38,15 @@ class Readings {
     result = reactivePower * 660;
   }
 
+<<<<<<< HEAD
   String getPowerConsumed({double activePower, double activePower1}) {
     result3 = activePower - activePower1;
 
     return result3.toStringAsFixed(2);
+=======
+  String getPowerConsumed(double activePower, double activePower1) {
+    result = activePower - activePower;
+    return result.toString();
+>>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
   }
 }
