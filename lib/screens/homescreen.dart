@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'package:substation_app/widgets/custom_text_field.dart';
 import 'package:http/http.dart' as http;
+import 'package:substation_app/screens/dashboard.dart';
+import 'package:substation_app/widgets/custom_text_field.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _autoValidate = true;
@@ -206,8 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.email_sharp,
+                            FaIcon(
+                              FontAwesomeIcons.envelope,
                               color: Colors.white,
                             ),
                             SizedBox(
@@ -363,9 +365,26 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.all(16.0),
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/dashboard');
-                          // signInWithGoogle()
-                          //     .whenComplete(() {
+                          //Add login with google
+                          // signInWithGoogle().whenComplete(() {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (BuildContext context) {
+                          //         return DashBoard();
+                          //       },
+                          //     ),
+                          //   );
+                          // });
+                          setState(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => DashBoard(),
+                              ),
+                            );
+                          });
+                          // signInWithGoogle().whenComplete(() {
                           //   Navigator.of(context).push(
                           //     MaterialPageRoute(
                           //       builder: (context) {
@@ -373,8 +392,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           //         return DashBoard();
                           //       },
                           //     ),
-                          //   );
+                          //   ); Navigator.pushNamed(context, '/dashboard');
                           // });
+
+                          // Navigator.pushNamed(context, 'loading');
                         },
                         child: Row(
                           children: [
