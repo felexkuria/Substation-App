@@ -406,6 +406,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                             SizedBox(
                               height: 10.0,
+<<<<<<< HEAD
                             ),
                             ..._selectedEvents.map(
                               (events) => Container(
@@ -446,6 +447,48 @@ class _DashBoardState extends State<DashBoard> {
                                 ),
                               ),
                             ),
+=======
+                            ),
+                            ..._selectedEvents.map(
+                              (events) => Container(
+                                // padding: EdgeInsets.all(12.0),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 10.0),
+                                // height: 110.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[900],
+                                      blurRadius: 6.0,
+                                      offset: Offset(0, 6),
+                                    ),
+                                  ],
+                                ),
+
+                                child: ListTile(
+                                  leading: Text(
+                                    'Panel N 1 Results',
+                                    style: TextStyle(
+                                        color: inActiveCardColor,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Quicksand'),
+                                  ),
+                                  tileColor: activeCardColor,
+                                  subtitle: Text(
+                                    'data',
+                                    style: TextStyle(color: inActiveCardColor),
+                                  ),
+                                  title: Text(
+                                    events,
+                                    style: TextStyle(color: inActiveCardColor),
+                                  ),
+                                ),
+                              ),
+                            ),
+>>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                             ReadingCard(
                               reading: '0800Hrs Reading',
                               status: 'PENDING',
@@ -502,11 +545,31 @@ class _DashBoardState extends State<DashBoard> {
                         controller: _timeController,
                         onTap: _handleTime,
                         decoration: kTimedecoration,
+<<<<<<< HEAD
+=======
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+<<<<<<< HEAD
+                      TextField(
+                        controller: _activepowerController2,
+                        decoration: kInputdecoration1,
+                        keyboardType: TextInputType.number,
+                        onChanged: (validator) {
+                          setState(() {
+                            _activepower660 = validator;
+
+                            print(_activepower660);
+                          });
+                        },
+>>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
                       TextField(
+<<<<<<< HEAD
                         controller: _activepowerController2,
                         decoration: kInputdecoration1,
                         keyboardType: TextInputType.number,
@@ -531,10 +594,49 @@ class _DashBoardState extends State<DashBoard> {
 
                             print(_reactivepower660);
                           });
+=======
+                        controller: _reactivepowerController1,
+                        decoration: kInputdecoration,
+                        keyboardType: TextInputType.number,
+                        onChanged: (validator) {
+                          setState(() {
+                            _reactivepower660 = validator;
+
+                            print(_reactivepower660);
+                          });
+=======
+                      ReadingCard(
+                        reading: '0800Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          //Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                      ReadingCard(
+                        reading: '1400Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          //Navigator.pushNamed(context, '/reading');
+                        },
+                      ),
+                      ReadingCard(
+                        reading: '2000Hrs Reading',
+                        status: 'PENDING',
+                        fontW: FontWeight.w300,
+                        onPressed: () {
+                          // Navigator.pushNamed(context, '/reading');
+>>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
+>>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                         },
                       ),
                     ],
                   ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                 ),
                 buttons: [
                   DialogButton(
@@ -589,6 +691,28 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                 ]).show();
           },
+<<<<<<< HEAD
+=======
+=======
+                )
+                //   },
+                // )
+              ],
+            ),
+          ],
+>>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.add,
+            color: inActiveCardColor,
+            size: 30,
+          ),
+          backgroundColor: activeCardColor,
+          onPressed: () {
+            Navigator.pushNamed(context, '/reading');
+          },
+>>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
         ),
       ),
     );
