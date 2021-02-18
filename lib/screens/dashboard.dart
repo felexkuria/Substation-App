@@ -7,8 +7,10 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substation_app/constants/constant.dart';
 import 'package:substation_app/models/readings.dart';
-import 'package:substation_app/screens/reading_screen.dart';
+import 'package:substation_app/models/user.dart';
+import 'package:substation_app/screens/homescreen.dart';
 import 'package:substation_app/screens/worker.dart';
+import 'package:substation_app/services/auth.dart';
 import 'package:substation_app/widgets/person_card.dart';
 
 import 'package:substation_app/widgets/reading_card.dart';
@@ -37,8 +39,11 @@ String _reactivepower = '';
 // String _displayName;
 bool _loading = false;
 TimeOfDay _timeOfDay = TimeOfDay.now();
+AuthResult authResult = AuthResult();
 
 class DashBoard extends StatefulWidget {
+  DashBoard({this.username});
+  final String username;
   @override
   _DashBoardState createState() => _DashBoardState();
 }
@@ -134,6 +139,8 @@ class _DashBoardState extends State<DashBoard> {
     return newMap;
   }
 
+  //AuthResult authResult = AuthResult();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -158,6 +165,14 @@ class _DashBoardState extends State<DashBoard> {
           actions: [
             IconButton(
               onPressed: () {
+                AuthResult().logOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => HomeScreen(),
+                  ),
+                );
+
                 //Navigator.pushNamed(context, 'worker');
               },
               icon: FaIcon(
@@ -201,7 +216,7 @@ class _DashBoardState extends State<DashBoard> {
                         },
                         radii: 60.0,
                         font: 18.0,
-                        name: 'Wycliffe Wanyama',
+                        name: 'wamamaR',
                         shift: 'OnShift',
                         profile: AssetImage('assets/images/wycliffe.jpg'),
                         taf: 'wanyama',

@@ -77,6 +77,72 @@ const kInputdecoration1 = InputDecoration(
     color: Color(0xFF070707),
   ),
 );
+const kInputdecorationemail = InputDecoration(
+  suffixIcon: IconButton(
+    icon: Icon(
+      Icons.clear,
+      color: Color(0xFF070707),
+    ),
+    onPressed: null,
+  ),
+  labelText: 'Enter Your Email Address',
+  filled: true,
+  fillColor: Colors.white,
+  prefixIcon: Icon(
+    Icons.email_outlined,
+    color: Color(0xFF070707),
+    size: 30.0,
+  ),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(30.0),
+    ),
+    borderSide: BorderSide(width: 0.8),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(30.0),
+    ),
+    borderSide: BorderSide(width: 0.8, color: activeCardColor),
+  ),
+  hintText: 'Enter Your Email Address',
+  hintStyle: TextStyle(
+    color: Color(0xFF070707),
+  ),
+);
+const kInputdecorationpassword = InputDecoration(
+  suffixIcon: IconButton(
+    icon: Icon(
+      Icons.clear,
+      color: Color(0xFF070707),
+    ),
+    onPressed: null,
+  ),
+  labelText: 'Enter Your Password',
+  filled: true,
+  fillColor: Colors.white,
+  prefixIcon: Icon(
+    Icons.lock,
+    color: Color(0xFF070707),
+    size: 30.0,
+  ),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(30.0),
+    ),
+    borderSide: BorderSide(width: 0.8),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(30.0),
+    ),
+    borderSide: BorderSide(width: 0.8, color: activeCardColor),
+  ),
+  hintText: 'Enter Your Password',
+  hintStyle: TextStyle(
+    color: Color(0xFF070707),
+  ),
+);
 const kReactivedecoration = InputDecoration(
   labelText: 'Enter Current Readings',
   prefixIcon: Icon(
