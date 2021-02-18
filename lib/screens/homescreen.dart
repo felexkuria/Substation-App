@@ -1,12 +1,17 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_ui/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:substation_app/constants/constant.dart';
 import 'package:substation_app/screens/dashboard.dart';
+import 'package:substation_app/services/auth.dart';
+import 'package:substation_app/services/sign_in.dart';
 import 'package:substation_app/widgets/custom_text_field.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -14,6 +19,8 @@ bool _autoValidate = true;
 String _email;
 String _password;
 String _name;
+const inActiveCardColor = Color(0xFF20BFA9);
+const activeCardColor = Color(0xFF070707);
 
 // String _displayName;
 bool _loading = false;
@@ -47,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   //     }
   //   }
   // }
+  User user;
 
   void userSignUp() async {
     setState(() {
@@ -80,6 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
   // get http => null;
 
   // AuthResult _authResult =AuthResult();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _emailTextController = TextEditingController();
+    _passwordTextController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,72 +154,83 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
-                                    Form(
-                                      key: _formKey,
-                                      // ignore: deprecated_member_use
-                                      autovalidate: _autoValidate,
-                                      child: Column(
-                                        children: <Widget>[
-                                          CustomTextField(
-                                            onSaved: (input) {
-                                              _email = input;
-                                            },
-                                            // validator: emailValidator,
-                                            icon: Icon(Icons.email),
-                                            hint: "EMAIL",
-                                          ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
-                                          CustomTextField(
-                                            icon: Icon(Icons.lock),
-                                            // obsecure: true,
-                                            onSaved: (input) => _name = input,
-                                            validator: (input) => input.isEmpty
-                                                ? "*Required"
-                                                : null,
-                                            hint: "USERNAME",
-                                          ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
-                                          CustomTextField(
-                                            icon: Icon(Icons.lock),
-                                            obsecure: true,
-                                            onSaved: (input) =>
-                                                _password = input,
-                                            validator: (input) => input.isEmpty
-                                                ? "*Required"
-                                                : null,
-                                            hint: "PASSWORD",
-                                          ),
-                                        ],
-                                      ),
+                                    Column(
+                                      children: <Widget>[
+                                        TextField(
+                                          controller: _emailTextController,
+                                          decoration: kInputdecorationemail,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          onChanged: (validator) {
+                                            setState(() {
+                                              _email = validator;
+
+                                              print(_email);
+                                            });
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        TextField(
+                                          controller: _passwordTextController,
+                                          obscureText: true,
+                                          decoration: kInputdecorationpassword,
+                                          keyboardType:
+                                              TextInputType.visiblePassword,
+                                          onChanged: (validator) {
+                                            setState(() {
+                                              _password = validator;
+
+                                              print(_password);
+                                            });
+                                          },
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                               ),
                               buttons: [
                                 DialogButton(
-                                  color: Colors.redAccent,
-                                  onPressed: () {
-                                    userSignUp();
-                                    // userSignIn();
-                                    print(_name);
-                                    print(_password);
-                                    print(_email);
-                                  },
-                                  child: _loading == false
-                                      ? Text(
-                                          "Submit",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        )
-                                      : CircularProgressIndicator(
-                                          backgroundColor: Colors.red,
-                                        ),
-                                )
+                                    color: inActiveCardColor,
+                                    onPressed: () async {
+                                      if (_emailTextController.text.isEmpty ||
+                                          _passwordTextController
+                                              .text.isEmpty) {
+                                        print('REQUIRED are Empty ');
+                                        return;
+                                      }
+                                      bool res = await AuthResult()
+                                          .registerWithEmail(
+                                        _emailTextController.text,
+                                        _passwordTextController.text,
+                                      )
+                                          .whenComplete(() {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                DashBoard(),
+                                          ),
+                                        );
+                                      });
+                                      if (!res) {
+                                        print('Login Failed');
+                                      }
+                                      // userSignUp();
+                                      // userSignIn();
+                                      // print(_name);
+                                      print(_password);
+                                      print(_email);
+                                    },
+                                    child: Text(
+                                      "Submit",
+                                      style: TextStyle(
+                                        color: activeCardColor,
+                                        fontSize: 20,
+                                      ),
+                                    ))
                               ]).show();
                         },
                         child: Row(
@@ -244,67 +271,41 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           Alert(
                               context: context,
-                              title: "Register",
+                              title: "Login With Email",
                               content: Padding(
                                 padding: EdgeInsets.all(16.0),
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
-                                    Form(
-                                      key: _formKey,
-                                      // ignore: deprecated_member_use
-                                      autovalidate: _autoValidate,
-                                      child: Column(
-                                        children: <Widget>[
-                                          CustomTextField(
-                                            onSaved: (input) {
-                                              _email = input;
-                                            },
-                                            // validator: emailValidator,
-                                            icon: Icon(Icons.email),
-                                            hint: "EMAIL",
-                                          ),
-                                          SizedBox(
-                                            height: 30.0,
-                                          ),
-                                          CustomTextField(
-                                            icon: Icon(Icons.lock),
-                                            obsecure: true,
-                                            onSaved: (input) => _name = input,
-                                            validator: (input) => input.isEmpty
-                                                ? "*Required"
-                                                : null,
-                                            hint: "USERNAME",
-                                          ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
-                                          CustomTextField(
-                                            icon:
-                                                Icon(Icons.account_box_rounded),
-                                            // obsecure: true,
-                                            onSaved: (input) => _email = input,
-                                            validator: (input) => input.isEmpty
-                                                ? "*Required"
-                                                : null,
-                                            hint: "EMAIL",
-                                          ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
-                                          CustomTextField(
-                                            icon: Icon(Icons.lock),
-                                            obsecure: true,
-                                            onSaved: (input) =>
-                                                _password = input,
-                                            validator: (input) => input.isEmpty
-                                                ? "*Required"
-                                                : null,
-                                            hint: "PASSWORD",
-                                          ),
-                                        ],
-                                      ),
+                                    TextField(
+                                      controller: _emailTextController,
+                                      decoration: kInputdecorationemail,
+                                      keyboardType: TextInputType.emailAddress,
+                                      onChanged: (validator) {
+                                        setState(() {
+                                          _email = validator;
+
+                                          print(_email);
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    TextField(
+                                      controller: _passwordTextController,
+                                      obscureText: true,
+                                      decoration: kInputdecorationpassword,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      onChanged: (validator) {
+                                        setState(() {
+                                          _password = validator;
+
+                                          print(_password);
+                                        });
+                                      },
                                     ),
                                   ],
                                 ),
@@ -312,8 +313,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttons: [
                                 DialogButton(
                                   color: Colors.redAccent,
-                                  onPressed: () {
-                                    userSignUp();
+                                  onPressed: () async {
+                                    if (_emailTextController.text.isEmpty ||
+                                        _passwordTextController.text.isEmpty) {
+                                      print('REQUIRED are Empty ');
+                                      return;
+                                    }
+                                    bool res = await AuthResult()
+                                        .signWithEmail(
+                                      _emailTextController.text,
+                                      _passwordTextController.text,
+                                    )
+                                        .whenComplete(() {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              DashBoard(),
+                                        ),
+                                      );
+                                    });
+                                    if (!res) {
+                                      print('Login Failed');
+                                    }
+                                    // userSignUp();
+                                    // userSignIn();
+                                    // print(_name);
+                                    print(_password);
+                                    print(_email);
                                   },
                                   child: _loading == false
                                       ? Text(
@@ -326,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           backgroundColor: Colors.red,
                                         ),
                                 ),
-                              ]);
+                              ]).show();
                         },
                         child: Row(
                           children: [
@@ -342,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: 20.0,
                             ),
                             Text(
-                              'Continue With Facebook',
+                              'Already a Member? Login',
                               style: TextStyle(
                                   color: Colors.white, fontSize: 20.0),
                             )
@@ -365,37 +392,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.all(16.0),
                         color: Colors.white,
                         onPressed: () {
-                          //Add login with google
-                          // signInWithGoogle().whenComplete(() {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (BuildContext context) {
-                          //         return DashBoard();
-                          //       },
-                          //     ),
-                          //   );
-                          // });
-                          setState(() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => DashBoard(),
-                              ),
-                            );
-                          });
-                          // signInWithGoogle().whenComplete(() {
-                          //   Navigator.of(context).push(
-                          //     MaterialPageRoute(
-                          //       builder: (context) {
-                          //         // return null;
-                          //         return DashBoard();
-                          //       },
-                          //     ),
-                          //   ); Navigator.pushNamed(context, '/dashboard');
-                          // });
-
-                          // Navigator.pushNamed(context, 'loading');
+                          signInWithGoogle().then((user) => {
+                                //this.user = user,
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        DashBoard(
+                                      username: user,
+                                    ),
+                                  ),
+                                )
+                              });
                         },
                         child: Row(
                           children: [
