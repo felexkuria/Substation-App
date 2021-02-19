@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-<<<<<<< HEAD
-import 'package:substation_app/constants/constant.dart';
-import 'package:substation_app/models/readings.dart';
-import 'package:substation_app/screens/worker.dart';
-import 'package:substation_app/widgets/reading_card.dart';
-=======
 
 import 'package:substation_app/constants/constant.dart';
 import 'package:substation_app/models/readings.dart';
-<<<<<<< HEAD
 import 'package:substation_app/screens/worker.dart';
 import 'package:substation_app/widgets/reading_card.dart';
-=======
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
+
+import 'package:substation_app/constants/constant.dart';
+import 'package:substation_app/models/readings.dart';
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool _autoValidate = true;
@@ -24,28 +17,19 @@ String _reactivepower660 = '';
 String _activepower1980 = '';
 String _reactivepower1980 = '';
 String _activepower = '';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
+
 String _reactivepower = '';
 //double myNumber2 = double.parse(_reactivepower);
 //int activepower;
 //String processing;
 
 //double activePowerCode = 660;
-<<<<<<< HEAD
-=======
-=======
+
 //double myNumber = double.parse(_activepower);
-String _reactivepower = '';
+// String _reactivepower = '';
 //double myNumber2 = double.parse(_reactivepower);
 //int activepower;
 String processing;
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
-
-//double activePowerCode = 660;
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
 
 // String _displayName;
 bool _loading = false;
@@ -61,21 +45,14 @@ class _ReadingScreenState extends State<ReadingScreen> {
   TextEditingController _timeController = TextEditingController();
   TextEditingController _activepowerController = TextEditingController();
   TextEditingController _reactivepowerController = TextEditingController();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
+
   TextEditingController _activepowerController1 = TextEditingController();
   TextEditingController _reactivepowerController1 = TextEditingController();
   TextEditingController _activepowerController2 = TextEditingController();
   TextEditingController _reactivepowerController2 = TextEditingController();
 
   TimeOfDayFormat timeOfDayFormat = TimeOfDayFormat.HH_colon_mm;
-<<<<<<< HEAD
-=======
-=======
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
+
   void _handleTime() async {
     final TimeOfDay timeOfDay = await showTimePicker(
       context: context,
@@ -150,17 +127,13 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   reading: 'N1 Cabinet',
                   status: 'PENDING',
                   fontW: FontWeight.w300,
-                  onPressed: () {
-                    buildAlert2(context).show();
-                  },
+                  onPressed: () {},
                 ),
                 ReadingCard(
                   reading: 'N2 Cabinet',
                   status: 'PENDING',
                   fontW: FontWeight.w300,
-                  onPressed: () {
-                    buildAlert(context).show();
-                  },
+                  onPressed: () {},
                 ),
                 ReadingCard(
                   reading: 'N3 Cabinet',
@@ -277,282 +250,5 @@ class _ReadingScreenState extends State<ReadingScreen> {
             );
           },
         ));
-  }
-
-  Alert buildAlert2(BuildContext context) {
-    return Alert(
-        context: context,
-        title: "Calculate Today Reading",
-        content: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
-              TextField(
-                readOnly: true,
-                controller: _timeController,
-                onTap: _handleTime,
-                decoration: kTimedecoration,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _activepowerController1,
-                decoration: kInputdecoration1,
-                keyboardType: TextInputType.number,
-                onChanged: (validator) {
-                  setState(() {
-                    _activepower1980 = validator;
-
-                    print(_activepower1980);
-                  });
-                },
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _reactivepowerController2,
-                decoration: kInputdecoration,
-                keyboardType: TextInputType.number,
-                onChanged: (validator) {
-                  setState(() {
-                    _reactivepower1980 = validator;
-
-                    print(_reactivepower1980);
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
-        buttons: [
-          DialogButton(
-            color: Color(0xFF20BFA9),
-            onPressed: () {
-              //Navigator.popAndPushNamed(context, '/reading');`
-              //print(_activepower
-              //print(_reactivepower);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => Worker(
-                    result660: readings.result2.toString(),
-                    result1980: readings.result3.toString(),
-                    result: readings.result.toString(),
-                    date: _timeController.text,
-<<<<<<< HEAD
-=======
-=======
-              Column(
-                children: <Widget>[
-                  TextField(
-                      readOnly: true,
-                      controller: _timeController,
-                      onTap: _handleTime,
-                      decoration: kTimedecoration),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextField(
-                    controller: _activepowerController,
-                    decoration: kInputdecoration,
-                    keyboardType: TextInputType.number,
-                    onChanged: (validator) {
-                      setState(() {
-                        _activepower = validator;
-
-                        processing = _activepower;
-                        //print(_activepower);
-                      });
-                    },
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
-                  ),
-                ),
-              );
-              readings.getReactivePower(
-                reactivePower1: double.parse(_activepower1980),
-                reactivePower: double.parse(_reactivepower1980),
-              );
-            },
-            child: _loading == false
-                ? Text(
-                    "Calculate",
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  )
-                : CircularProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ),
-<<<<<<< HEAD
-          ),
-        ]);
-  }
-
-  Alert buildAlert(
-    BuildContext context,
-  ) {
-    return Alert(
-        context: context,
-        title: "Calculate Today Reading",
-        content: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              TextField(
-                readOnly: true,
-                controller: _timeController,
-                onTap: _handleTime,
-                decoration: kTimedecoration,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _activepowerController,
-                decoration: kInputdecoration1,
-                keyboardType: TextInputType.number,
-                onChanged: (validator) {
-                  setState(() {
-                    _activepower = validator;
-
-                    print(_activepower);
-                  });
-                },
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _reactivepowerController,
-                decoration: kInputdecoration,
-                keyboardType: TextInputType.number,
-                onChanged: (validator) {
-                  setState(() {
-                    _reactivepower = validator;
-
-                    print(_reactivepower);
-                  });
-                },
-=======
-<<<<<<< HEAD
-          ),
-        ]);
-  }
-
-  Alert buildAlert(
-    BuildContext context,
-  ) {
-    return Alert(
-        context: context,
-        title: "Calculate Today Reading",
-        content: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              TextField(
-                readOnly: true,
-                controller: _timeController,
-                onTap: _handleTime,
-                decoration: kTimedecoration,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _activepowerController,
-                decoration: kInputdecoration1,
-                keyboardType: TextInputType.number,
-                onChanged: (validator) {
-                  setState(() {
-                    _activepower = validator;
-
-                    print(_activepower);
-                  });
-                },
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              TextField(
-                controller: _reactivepowerController,
-                decoration: kInputdecoration,
-                keyboardType: TextInputType.number,
-                onChanged: (validator) {
-                  setState(() {
-                    _reactivepower = validator;
-
-                    print(_reactivepower);
-                  });
-                },
-=======
-                  TextField(
-                    decoration: kReactivedecoration,
-                    controller: _reactivepowerController,
-                    // validator: emailValidator,
-
-                    onChanged: (validator) {
-                      setState(() {
-                        _reactivepower = validator;
-                        //print(_reactivepower);
-                      });
-                    },
-                  ),
-                ],
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
-              ),
-            ],
-          ),
-        ),
-        buttons: [
-          DialogButton(
-            color: Color(0xFF20BFA9),
-            onPressed: () {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
-              //Navigator.popAndPushNamed(context, '/reading');`
-              //print(_activepower
-              //print(_reactivepower);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => Worker(
-                    result660: readings.result2.toString(),
-                    result1980: readings.result3.toString(),
-                    result: readings.result.toString(),
-                    date: _timeController.text,
-                  ),
-                ),
-              );
-<<<<<<< HEAD
-=======
-=======
-              //Navigator.popAndPushNamed(context, '/reading');
-              print(_activepower);
-              print(_reactivepower);
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
-              readings.getActivePower(
-                activePower1: double.parse(_activepower),
-                activePower: double.parse(_reactivepower),
-              );
-            },
-            child: _loading == false
-                ? Text(
-                    "Calculate",
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  )
-                : CircularProgressIndicator(
-                    backgroundColor: Colors.red,
-                  ),
-          ),
-        ]);
   }
 }

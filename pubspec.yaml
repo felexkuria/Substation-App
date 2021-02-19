@@ -26,16 +26,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
-=======
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
+
 flutter:
   uses-material-design: true
   assets:
@@ -48,13 +43,7 @@ flutter:
     - family: Quicksand
       fonts:
         - asset: assets/fonts/Quicksand-Regular.ttf
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
         # - asset: fonts/TrajanPro_Bold.ttf
         #   weight: 700
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-=======
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5

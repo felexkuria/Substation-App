@@ -421,7 +421,6 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                             SizedBox(
                               height: 10.0,
-<<<<<<< HEAD
                             ),
                             ..._selectedEvents.map(
                               (events) => Container(
@@ -462,8 +461,6 @@ class _DashBoardState extends State<DashBoard> {
                                 ),
                               ),
                             ),
-=======
-                            ),
                             ..._selectedEvents.map(
                               (events) => Container(
                                 // padding: EdgeInsets.all(12.0),
@@ -503,7 +500,6 @@ class _DashBoardState extends State<DashBoard> {
                                 ),
                               ),
                             ),
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                             ReadingCard(
                               reading: '0800Hrs Reading',
                               status: 'PENDING',
@@ -560,13 +556,10 @@ class _DashBoardState extends State<DashBoard> {
                         controller: _timeController,
                         onTap: _handleTime,
                         decoration: kTimedecoration,
-<<<<<<< HEAD
-=======
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
-<<<<<<< HEAD
                       TextField(
                         controller: _activepowerController2,
                         decoration: kInputdecoration1,
@@ -578,13 +571,11 @@ class _DashBoardState extends State<DashBoard> {
                             print(_activepower660);
                           });
                         },
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
                       TextField(
-<<<<<<< HEAD
                         controller: _activepowerController2,
                         decoration: kInputdecoration1,
                         keyboardType: TextInputType.number,
@@ -609,17 +600,11 @@ class _DashBoardState extends State<DashBoard> {
 
                             print(_reactivepower660);
                           });
-=======
-                        controller: _reactivepowerController1,
-                        decoration: kInputdecoration,
-                        keyboardType: TextInputType.number,
-                        onChanged: (validator) {
-                          setState(() {
-                            _reactivepower660 = validator;
-
-                            print(_reactivepower660);
-                          });
-=======
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       ReadingCard(
                         reading: '0800Hrs Reading',
                         status: 'PENDING',
@@ -642,16 +627,10 @@ class _DashBoardState extends State<DashBoard> {
                         fontW: FontWeight.w300,
                         onPressed: () {
                           // Navigator.pushNamed(context, '/reading');
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                         },
                       ),
                     ],
                   ),
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
                 ),
                 buttons: [
                   DialogButton(
@@ -706,28 +685,6 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                 ]).show();
           },
-<<<<<<< HEAD
-=======
-=======
-                )
-                //   },
-                // )
-              ],
-            ),
-          ],
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: inActiveCardColor,
-            size: 30,
-          ),
-          backgroundColor: activeCardColor,
-          onPressed: () {
-            Navigator.pushNamed(context, '/reading');
-          },
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
         ),
       ),
     );

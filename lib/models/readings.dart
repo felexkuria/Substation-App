@@ -11,23 +11,18 @@ class Readings {
   double result3;
   Readings({this.activePower, this.reactivePower});
 
-  String getActivePower({double activePower, double activePower1}) {
+  dynamic getActivePower({double activePower, double activePower1}) {
     result = ((activePower - activePower1) * activePowerCode1);
-<<<<<<< HEAD
+
+    //result.round();
+    result.toString();
+
     //result.round();
 
     return result.toStringAsFixed(2);
-=======
-<<<<<<< HEAD
-    //result.round();
-
-    return result.toStringAsFixed(2);
-=======
     print(activePower1);
 
     return result.toString();
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
 
     //print(result);
   }
@@ -44,21 +39,9 @@ class Readings {
     result = reactivePower * 660;
   }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
   String getPowerConsumed({double activePower, double activePower1}) {
     result3 = activePower - activePower1;
 
     return result3.toStringAsFixed(2);
-<<<<<<< HEAD
-=======
-=======
-  String getPowerConsumed(double activePower, double activePower1) {
-    result = activePower - activePower;
-    return result.toString();
->>>>>>> ea071398d12cde0dae3a98f32ad405996c0ef4e7
->>>>>>> 2eab770bf93ae2625c4d22ca9c9eb00e63c6e4c5
   }
 }
