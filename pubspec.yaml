@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   firebase_auth: any
   firebase_auth_ui: any
-  firebase_core: ^0.7.0
+  firebase_core: any
   flutter_spinkit: ^4.1.2+1
   fluttertoast: ^7.1.1
   font_awesome_flutter: ^8.11.0

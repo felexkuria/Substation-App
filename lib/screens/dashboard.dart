@@ -16,6 +16,7 @@ import 'package:substation_app/widgets/person_card.dart';
 import 'package:substation_app/widgets/reading_card.dart';
 import 'package:substation_app/widgets/select_card.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'reading_screen.dart';
 
 enum Time { month, today, quarter }
 
@@ -194,7 +195,7 @@ class _DashBoardState extends State<DashBoard> {
             //style,R
             style: TextStyle(
               color: Color(0xFFFBFCFF),
-              fontFamily: 'Quicksand',
+              fontFamily: 'Pacifico',
               fontSize: 20.0,
               letterSpacing: 1.2,
               fontWeight: FontWeight.bold,
@@ -212,11 +213,16 @@ class _DashBoardState extends State<DashBoard> {
                     children: [
                       PersonCard(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'worker');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => Worker(),
+                            ),
+                          );
                         },
                         radii: 60.0,
                         font: 18.0,
-                        name: 'wamamaR',
+                        name: 'Wanyama',
                         shift: 'OnShift',
                         profile: AssetImage('assets/images/wycliffe.jpg'),
                         taf: 'wanyama',
@@ -238,7 +244,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                       PersonCard(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'worker');
+                          //Navigator.pushNamed(context, 'worker');
                         },
                         radii: 35.0,
                         font: 18.0,
@@ -318,14 +324,6 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ],
                       ),
-                      // ListView.builder(
-                      //   itemCount: 2,
-                      //   itemBuilder: (BuildContext context, int index) {
-                      //     if (index == 0)
-                      //       return Padding(
-                      //         padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      //         child:
-                      //       );
 
                       SingleChildScrollView(
                         child: Column(
@@ -474,7 +472,10 @@ class _DashBoardState extends State<DashBoard> {
                               status: 'PENDING',
                               fontW: FontWeight.w300,
                               onPressed: () {
-                                //Navigator.pushNamed(context, '/reading');
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                  return ReadingScreen();
+                                }));
                               },
                             ),
                             ReadingCard(
@@ -505,107 +506,110 @@ class _DashBoardState extends State<DashBoard> {
           ),
           backgroundColor: inActiveCardColor,
           onPressed: () {
-            Alert(
-                context: context,
-                title: "Calculate Today Reading",
-                content: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      TextField(
-                        readOnly: true,
-                        controller: _timeController,
-                        onTap: _handleTime,
-                        decoration: kTimedecoration,
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextField(
-                        controller: _activepowerController2,
-                        decoration: kInputdecoration1,
-                        keyboardType: TextInputType.number,
-                        onChanged: (validator) {
-                          setState(() {
-                            _activepower660 = validator;
-
-                            print(_activepower660);
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextField(
-                        controller: _reactivepowerController1,
-                        decoration: kInputdecoration,
-                        keyboardType: TextInputType.number,
-                        onChanged: (validator) {
-                          setState(() {
-                            _reactivepower660 = validator;
-
-                            print(_reactivepower660);
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                buttons: [
-                  DialogButton(
-                    color: Color(0xFF20BFA9),
-                    onPressed: () {
-                      setState(
-                        () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => Worker(
-                                result660: readings.result2.toString(),
-                                result1980: readings.result3.toString(),
-                                result: readings.result.toString(),
-                                date: _timeController.text,
-                              ),
-                            ),
-                          );
-                          readings.getPowerConsumed(
-                            activePower1: double.parse(_activepower660),
-                            activePower: double.parse(_reactivepower660),
-                          );
-                          if (readings.result3.toStringAsFixed(2).isEmpty)
-                            return;
-
-                          if (_events[calendarController.selectedDay] != null) {
-                            _events[calendarController.selectedDay]
-                                .add(readings.result3.toStringAsFixed(2));
-                          } else {
-                            _events[calendarController.selectedDay] = [
-                              readings.result3.toStringAsFixed(2)
-                            ];
-                          }
-                          prefs.setString(
-                            "events",
-                            jsonEncode(
-                              encodeMap(_events),
-                            ),
-                          );
-                          //readings.result3.toStringAsFixed(2).clea
-                        },
-                      );
-                    },
-                    child: _loading == false
-                        ? Text(
-                            "Calculate",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                          )
-                        : CircularProgressIndicator(
-                            backgroundColor: Colors.red,
-                          ),
-                  ),
-                ]).show();
+            buildAlert(context).show();
           },
         ),
       ),
     );
+  }
+
+  Alert buildAlert(BuildContext context) {
+    return Alert(
+        context: context,
+        title: "Calculate Today Reading",
+        content: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                readOnly: true,
+                controller: _timeController,
+                onTap: _handleTime,
+                decoration: kTimedecoration,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                controller: _activepowerController2,
+                decoration: kInputdecoration1,
+                keyboardType: TextInputType.number,
+                onChanged: (validator) {
+                  setState(() {
+                    _activepower660 = validator;
+
+                    print(_activepower660);
+                  });
+                },
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                controller: _reactivepowerController1,
+                decoration: kInputdecoration,
+                keyboardType: TextInputType.number,
+                onChanged: (validator) {
+                  setState(() {
+                    _reactivepower660 = validator;
+
+                    print(_reactivepower660);
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+        buttons: [
+          DialogButton(
+            color: Color(0xFF20BFA9),
+            onPressed: () {
+              setState(
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => Worker(
+                        result660: readings.result2.toString(),
+                        result1980: readings.result3.toString(),
+                        result: readings.result.toString(),
+                        date: _timeController.text,
+                      ),
+                    ),
+                  );
+                  readings.getPowerConsumed(
+                    activePower1: double.parse(_activepower660),
+                    activePower: double.parse(_reactivepower660),
+                  );
+                  if (readings.result3.toStringAsFixed(2).isEmpty) return;
+
+                  if (_events[calendarController.selectedDay] != null) {
+                    _events[calendarController.selectedDay]
+                        .add(readings.result3.toStringAsFixed(2));
+                  } else {
+                    _events[calendarController.selectedDay] = [
+                      readings.result3.toStringAsFixed(2)
+                    ];
+                  }
+                  prefs.setString(
+                    "events",
+                    jsonEncode(
+                      encodeMap(_events),
+                    ),
+                  );
+                  //readings.result3.toStringAsFixed(2).clea
+                },
+              );
+            },
+            child: _loading == false
+                ? Text(
+                    "Calculate",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  )
+                : CircularProgressIndicator(
+                    backgroundColor: Colors.red,
+                  ),
+          ),
+        ]);
   }
 }

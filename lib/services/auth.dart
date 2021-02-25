@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthResult {
@@ -15,7 +14,7 @@ class AuthResult {
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user;
       if (user != null) {
-        print(user);
+        print(user.displayName);
         return true;
       } else
         return false;

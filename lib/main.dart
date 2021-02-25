@@ -27,31 +27,13 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return FutureBuilder(
-    //   // Initialize FlutterFire:
-    //   future: _initialization,
-    //   builder: (context, snapshot) {
-    //     // Check for errors
-    //     if (snapshot.hasError) {
-    //       return HomeScreen();
-    //     }
-
-    //     // Once complete, show your application
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       return DashBoard();
-    //     }
-
-    //     // Otherwise, show something whilst waiting for initialization to complete
-    //     return Loading();
-    //   },
-    // );
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return Loading();
-        if (!snapshot.hasData || snapshot.hasData == null) return DashBoard();
-        return HomeScreen();
+        if (!snapshot.hasData || snapshot.hasData == null) return HomeScreen();
+        return DashBoard();
       },
     );
   }

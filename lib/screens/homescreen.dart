@@ -31,63 +31,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // void userSignIn() async {
-  //   setState(() {
-  //     _loading = true;
-  //   });
-  //   var url = "https://multi-touchenterprisekenya.co.ke/backEnd/signin.php";
-  //   var data = {
-  //     "email": _email,
-  //     "pass": _password,
-  //   };
-  //   var res = await http.post(url, body: data);
-  //   if (jsonDecode(res.body) == "dont have an account") {
-  //     Fluttertoast.showToast(
-  //         msg: "dont have an account, Create an Account",
-  //         toastLength: Toast.LENGTH_SHORT);
-  //   } else {
-  //     if (jsonDecode(res.body) == "false") {
-  //       Fluttertoast.showToast(
-  //           msg: "incorrect password", toastLength: Toast.LENGTH_SHORT);
-  //     } else {
-  //       print(jsonDecode(res.body));
-  //     }
-  //   }
-  // }
   User user;
 
-  void userSignUp() async {
-    setState(() {
-      _loading = true;
-    });
-
-    var url = "https://multi-touchenterprisekenya.co.ke/backEnd/signup.php";
-    var data = {
-      "email": _email,
-      "name": _name,
-      "pass": _password,
-    };
-    var res = await http.post(url, body: data);
-    if (jsonDecode(res.body) == "dont have an account") {
-      Fluttertoast.showToast(
-          msg: "don't have an account, Create an Account",
-          toastLength: Toast.LENGTH_SHORT);
-    } else {
-      if (jsonDecode(res.body) == "false") {
-        Fluttertoast.showToast(
-            msg: "incorrect password", toastLength: Toast.LENGTH_SHORT);
-      } else {
-        print(jsonDecode(res.body));
-      }
-    }
-    setState(() {
-      _loading = false;
-    });
-  }
-
-  // get http => null;
-
-  // AuthResult _authResult =AuthResult();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
   @override
@@ -165,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             setState(() {
                                               _email = validator;
 
-                                              print(_email);
+                                              //print(_email);
                                             });
                                           },
                                         ),
@@ -182,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             setState(() {
                                               _password = validator;
 
-                                              print(_password);
+                                              //print(_password);
                                             });
                                           },
                                         ),
@@ -476,7 +421,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             DialogButton(
                               color: Colors.redAccent,
                               onPressed: () {
-                                userSignUp();
                                 print(_email);
                               },
                               child: _loading == false
