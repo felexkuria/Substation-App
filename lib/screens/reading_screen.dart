@@ -38,6 +38,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
   TextEditingController _reactivepowerController1 = TextEditingController();
   TextEditingController _activepowerController2 = TextEditingController();
   TextEditingController _reactivepowerController2 = TextEditingController();
+  String selectedPowerValue = "More";
 
   TimeOfDayFormat timeOfDayFormat = TimeOfDayFormat.HH_colon_mm;
   void _handleTime() async {
@@ -80,7 +81,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                   Icons.more_vert,
                   color: Colors.white,
                 ),
-                onPressed: null)
+                onPressed: () {})
           ],
         ),
         body: ListView.builder(
@@ -270,6 +271,35 @@ class _ReadingScreenState extends State<ReadingScreen> {
               ),
               SizedBox(
                 height: 20.0,
+              ),
+              Container(
+                height: 150.0,
+                color: Theme.of(context).primaryColor,
+                child: DropdownButton(
+                  value: selectedPowerValue,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text("Settings"),
+                      value: "Settings",
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Contact Us"),
+                      value: "Settings",
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Upload"),
+                      value: "Settings",
+                    )
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedPowerValue = value;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
               ),
               TextField(
                 controller: _reactivepowerController2,

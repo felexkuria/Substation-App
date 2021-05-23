@@ -1,21 +1,23 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth_ui/providers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:substation_app/constants/constant.dart';
 import 'package:substation_app/screens/dashboard.dart';
 import 'package:substation_app/services/auth.dart';
 import 'package:substation_app/services/sign_in.dart';
 import 'package:substation_app/widgets/custom_text_field.dart';
 
+import 'reading_screen.dart';
+
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-bool _autoValidate = true;
+
 String _email;
 String _password;
 String _name;
@@ -101,9 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Column(
                                       children: <Widget>[
-                                        TextField(
+                                        TextFormField(
                                           controller: _emailTextController,
                                           decoration: kInputdecorationemail,
+                                          validator: (val) => _emailTextController
+                                                      .text.length <
+                                                  6
+                                              ? "Weak password Input A strong password with 6 character"
+                                              : null,
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           onChanged: (validator) {
@@ -117,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SizedBox(
                                           height: 20.0,
                                         ),
-                                        TextField(
+                                        TextFormField(
                                           controller: _passwordTextController,
                                           obscureText: true,
                                           decoration: kInputdecorationpassword,
@@ -139,35 +146,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttons: [
                                 DialogButton(
                                     color: inActiveCardColor,
-                                    onPressed: () async {
+                                    onPressed: () {
                                       if (_emailTextController.text.isEmpty ||
-                                          _passwordTextController
-                                              .text.isEmpty) {
-                                        print('REQUIRED are Empty ');
+                                          _passwordTextController.text.isEmpty &
+                                              !_emailTextController.text
+                                                  .contains("@")) {
+                                        Fluttertoast.showToast(
+                                            msg: "Dont leave blank Field");
                                         return;
-                                      }
-                                      bool res = await AuthResult()
-                                          .registerWithEmail(
-                                        _emailTextController.text,
-                                        _passwordTextController.text,
-                                      )
-                                          .whenComplete(() {
-                                        Navigator.push(
+                                      } else {
+                                        AuthResult().registerUserWithEmail(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                DashBoard(),
-                                          ),
+                                          _emailTextController.text,
+                                          _passwordTextController.text,
                                         );
-                                      });
-                                      if (!res) {
-                                        print('Login Failed');
                                       }
-                                      // userSignUp();
-                                      // userSignIn();
-                                      // print(_name);
-                                      print(_password);
-                                      print(_email);
                                     },
                                     child: Text(
                                       "Submit",
@@ -258,34 +251,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               buttons: [
                                 DialogButton(
                                   color: Colors.redAccent,
-                                  onPressed: () async {
+                                  onPressed: () {
                                     if (_emailTextController.text.isEmpty ||
                                         _passwordTextController.text.isEmpty) {
                                       print('REQUIRED are Empty ');
                                       return;
+                                    } else {
+                                      AuthResult().loginWithEmail(
+                                          _emailTextController.text,
+                                          _passwordTextController.text,
+                                          context);
                                     }
-                                    bool res = await AuthResult()
-                                        .signWithEmail(
-                                      _emailTextController.text,
-                                      _passwordTextController.text,
-                                    )
-                                        .whenComplete(() {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              DashBoard(),
-                                        ),
-                                      );
-                                    });
-                                    if (!res) {
-                                      print('Login Failed');
-                                    }
-                                    // userSignUp();
-                                    // userSignIn();
-                                    // print(_name);
-                                    print(_password);
-                                    print(_email);
                                   },
                                   child: _loading == false
                                       ? Text(
@@ -314,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: 20.0,
                             ),
                             Text(
-                              'Already a Member? Login',
+                              'Already a Member?',
                               style: TextStyle(
                                   color: Colors.white, fontSize: 20.0),
                             )
@@ -337,18 +313,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.all(16.0),
                         color: Colors.white,
                         onPressed: () {
-                          signInWithGoogle().then((user) => {
-                                //this.user = user,
-                                Navigator.push(
+                          AuthResult()
+                              .signInWithGoogle()
+                              .whenComplete(() => Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        DashBoard(
-                                      username: user,
-                                    ),
-                                  ),
-                                )
-                              });
+                                        ReadingScreen(),
+                                  )));
                         },
                         child: Row(
                           children: [
@@ -386,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Form(
                                   key: _formKey,
                                   // ignore: deprecated_member_use
-                                  autovalidate: _autoValidate,
+
                                   child: Column(
                                     children: <Widget>[
                                       CustomTextField(
@@ -421,7 +393,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             DialogButton(
                               color: Colors.redAccent,
                               onPressed: () {
-                                print(_email);
+                                AuthResult()
+                                    .loginWithEmail(_email, _password, context);
                               },
                               child: _loading == false
                                   ? Text(

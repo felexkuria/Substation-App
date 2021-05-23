@@ -3,11 +3,12 @@ import 'package:substation_app/constants/constant.dart';
 import 'package:substation_app/widgets/result_card.dart';
 
 class Worker extends StatefulWidget {
-  Worker({this.result660, this.result1980, this.result, this.date});
+  Worker({this.result660, this.result1980, this.result, this.date, this.name});
   final String result660;
   final String result1980;
   final String result;
   final String date;
+  final String name;
 
   @override
   _WorkerState createState() => _WorkerState();
@@ -46,6 +47,10 @@ class _WorkerState extends State<Worker> {
                     tag: 'wanyama',
                     child: CircleAvatar(
                       radius: 120.0,
+                      child: Text(
+                        widget.name,
+                        style: kNamestyle,
+                      ),
                       backgroundImage: AssetImage("assets/images/wycliffe.jpg"),
                     ),
                   ),
