@@ -9,15 +9,15 @@ const activeCardColor = Color(0xFF3A3756);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  initializeDateFormatting().then((_) => runApp(
-        MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.green,
-          ),
-          home: HomeScreen(),
-        ),
-      ));
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: HomeScreen(),
+    ),
+  );
 }
 
 // class MainScreen extends StatelessWidget {

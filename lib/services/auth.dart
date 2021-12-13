@@ -15,6 +15,20 @@ class AuthResult {
   DatabaseReference userRefs =
       FirebaseDatabase.instance.reference().child('users');
 
+  Future signInAnnon() async {
+    // final User user = (await auth.signInAnonymously()).user;
+    //auth.authStateChanges().map(() => null);
+
+    // try {
+    //   UserCredential userCredential = await auth.signInAnonymously();
+    //   User user = userCredential.user;
+    //   return user;
+    // } catch (e) {
+    //   print(e.toString());
+    //   return null;
+    // }
+  }
+
   registerUserWithEmail(
       BuildContext context, String _email, String _password) async {
     final User user = (await auth
