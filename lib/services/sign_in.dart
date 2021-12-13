@@ -30,18 +30,6 @@ Future<String> signInWithGoogle() async {
 
     print('signInWithGoogle succeeded: $user');
 
-    // getProfileImage() {
-    //   if (_auth.currentUser.photoURL != null) {
-    //     return Image.network(
-    //       _auth.currentUser.photoURL,
-    //       height: 100,
-    //       width: 100,
-    //     );
-    //   } else {
-    //     return Icon(Icons.account_circle, size: 100);
-    //   }
-    // }
-
     return '$user';
   }
 

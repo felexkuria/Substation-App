@@ -36,7 +36,7 @@ class _LoadingState extends State<Loading> {
       body: SafeArea(
         child: Center(
           child: SpinKitCircle(
-            color: activeCardColor,
+            color: Colors.black,
             size: 100.0,
           ),
         ),
