@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
+import 'package:substation_app/models/user.dart';
+import 'package:substation_app/screens/loading.dart';
 import 'screens/homescreen.dart';
 
 const inActiveCardColor = Color(0xFFF9FAFC);
@@ -10,12 +13,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    MultiProvider(
+      providers: [Provider<LocalUser>(create: (_) => LocalUser())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: Loading(),
       ),
-      home: HomeScreen(),
     ),
   );
 }

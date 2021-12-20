@@ -1,5 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+import 'package:substation_app/models/user.dart';
+import 'package:substation_app/screens/homescreen.dart';
+import 'package:substation_app/screens/reading_screen.dart';
+import 'package:substation_app/services/auth.dart';
 
 import 'dashboard.dart';
 
@@ -31,16 +37,26 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.indigo[100],
-      body: SafeArea(
-        child: Center(
-          child: SpinKitCircle(
-            color: Colors.black,
-            size: 100.0,
-          ),
-        ),
-      ),
-    );
+    final auth = Provider.of<AuthResult>(context);
+    return StreamBuilder<User>(
+        stream: auth.user,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            final User user = snapshot.data;
+            return user == null ? HomeScreen() : ReadingScreen();
+          } else {
+            return Scaffold(
+              backgroundColor: Colors.indigo[100],
+              body: SafeArea(
+                child: Center(
+                  child: SpinKitCircle(
+                    color: Colors.black,
+                    size: 100.0,
+                  ),
+                ),
+              ),
+            );
+          }
+        });
   }
 }

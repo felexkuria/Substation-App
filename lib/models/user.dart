@@ -1,10 +1,6 @@
-class User {
-  String name;
-  String shift;
-  String url;
-  User({
-    this.name,
-    this.shift,
-    this.url,
+class LocalUser {
+  String uid;
+  LocalUser({
+    this.uid,
   });
 }

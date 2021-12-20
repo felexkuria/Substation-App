@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:substation_app/models/user.dart';
 import 'package:substation_app/screens/reading_screen.dart';
 
 class AuthResult {
@@ -27,6 +28,17 @@ class AuthResult {
     //   print(e.toString());
     //   return null;
     // }
+  }
+  getLocalUser(User user) {
+    if (user == null) {
+      null;
+    }
+    return LocalUser(uid: user.uid);
+  }
+
+  Stream<User> get user {
+    return auth.authStateChanges().map(getLocalUser);
+    // return user;
   }
 
   registerUserWithEmail(
@@ -63,6 +75,7 @@ class AuthResult {
           msg: "Email Address Already exist try Login Screen",
           toastLength: Toast.LENGTH_LONG);
     }
+    return getLocalUser(user);
   }
 
   loginWithEmail(String _email, String _password, BuildContext context) async {
@@ -96,6 +109,7 @@ class AuthResult {
           msg: "Error Occured Can be SIgned in!!",
           toastLength: Toast.LENGTH_LONG);
     }
+    return getLocalUser(user);
   }
 
   signInWithGoogle() async {
@@ -107,7 +121,7 @@ class AuthResult {
             await auth.signInWithPopup(authProvider);
 
         User user = userCredential.user;
-        return user;
+        return getLocalUser(user);
       } catch (e) {
         print(e);
       }
@@ -126,6 +140,7 @@ class AuthResult {
           final UserCredential userCredential =
               await auth.signInWithCredential(credential);
           User user = userCredential.user;
+          return getLocalUser(user);
         } on FirebaseAuthException catch (e) {
           if (e.code == 'account-exists-with-different-credential') {
             Fluttertoast.showToast(
